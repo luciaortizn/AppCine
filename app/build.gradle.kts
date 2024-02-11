@@ -44,4 +44,9 @@ dependencies {
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+
+    //dependencias para material3
+    implementation("com.google.accompanist:accompanist-adaptive:0.26.2-beta")
+    // https://mvnrepository.com/artifact/com.google.android.material/material parece que es el que tiene más usos
+    implementation("com.google.android.material:material:1.10.0")
 }
