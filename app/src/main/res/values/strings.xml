@@ -5,4 +5,5 @@
     <string name="home">Home</string>
     <string name="favoritos">Favoritos</string>
     <string name="perfil">Perfil</string>
+    <string name="searchbar_hint">busca una película...</string>
 </resources>
