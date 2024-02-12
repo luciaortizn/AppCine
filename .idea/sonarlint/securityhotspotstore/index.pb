@@ -25,3 +25,11 @@ S
 #.idea/sonarlint/issuestore/index.pb,9\f\9fe84ebb15faf917b7def6236dba604453cc61e0
 Å
 Q.idea/sonarlint/securityhotspotstore/d/4/d42bb46815d54ee469998a754a32b6e1b5e3c967,0\b\0b0f888c94215042c00535e53b1f5526cb5283a0
+g
+7app/src/main/java/com/example/appcine/PerfilFragment.kt,4\3\431912591780612f3b0df7ec0136ab82ecad66af
+p
+@app/src/main/java/com/example/appcine/NewPopularFilmsFragment.kt,2\8\2832a5324fe9e2c6bda68af7e7893a96019cc94b
+Å
+Q.idea/sonarlint/securityhotspotstore/4/3/431912591780612f3b0df7ec0136ab82ecad66af,e\b\eb5d97f25510545a119cb2ea5e7dd0b9b1b46f0d
+Å
+Q.idea/sonarlint/securityhotspotstore/2/8/2832a5324fe9e2c6bda68af7e7893a96019cc94b,3\8\383fb4e67c0dcee4e5949fdaf0a5475863a56db4

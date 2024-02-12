@@ -11,13 +11,6 @@
         android:layout_height="match_parent">
 
         <!-- NestedScrollingChild goes here (NestedScrollView, RecyclerView, etc.). -->
-        <androidx.core.widget.NestedScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:contentDescription="para buscar contenido"
-            app:layout_behavior="@string/searchbar_scrolling_view_behavior">
-            <!-- Screen content goes here. -->
-        </androidx.core.widget.NestedScrollView>
 
         <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
@@ -31,20 +24,41 @@
 
         <com.google.android.material.search.SearchView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="300dp"
             android:hint="@string/searchbar_hint"
             app:layout_anchor="@id/search_bar">
             <!-- Search suggestions/results go here (ScrollView, RecyclerView, etc.). -->
+            <androidx.core.widget.NestedScrollView
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:contentDescription="para buscar contenido"
+                app:layout_behavior="@string/searchbar_scrolling_view_behavior">
+                <!-- Screen content goes here. -->
+            </androidx.core.widget.NestedScrollView>
         </com.google.android.material.search.SearchView>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/newPopularFilmFragment"
+        android:backgroundTint="@color/design_default_color_primary_dark"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="300dp"
+        tools:layout="@layout/fragment_new_popular_films"
+        tools:ignore="NotSibling">
+
+    </androidx.fragment.app.FragmentContainerView>
     <androidx.fragment.app.FragmentContainerView android:name="com.example.appcine.NavbarFragment"
-        android:id="@+id/viewer"
-        android:layout_weight="2"
+        android:id="@+id/bottom_nav"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         tools:layout="@layout/fragment_navbar"/>
 
 
