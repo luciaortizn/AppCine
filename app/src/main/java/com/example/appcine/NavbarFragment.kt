@@ -1,5 +1,6 @@
 package com.example.appcine
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -19,7 +20,7 @@ private const val ARG_PARAM2 = "param2"
  * Use the [NavbarFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class NavbarFragment : Fragment(), NavigationBarView.OnItemSelectedListener {
+class NavbarFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
@@ -32,46 +33,41 @@ class NavbarFragment : Fragment(), NavigationBarView.OnItemSelectedListener {
         }
     }
     // Implementa la función onNavigationItemSelected
-    override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.item_1 -> {
-                //logica home
 
-                return true
-            }
-            R.id.item_2 -> {
-                //lógica favoritos
-
-                return true
-            }
-
-            R.id.item_3 -> {
-                //necesito cambiar de fragment a la vista
-                val perfilFragment = PerfilFragment()
-                requireActivity().supportFragmentManager.beginTransaction()
-                    .replace(R.id.newPopularFilmFragment, perfilFragment)
-                    .addToBackStack(null).commit()
-                return true
-            }
-            else -> return false
-        }
-    }
     override fun onCreateView(
 
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
 
+
         //Código para cambiar de navegación
         val view = inflater.inflate(R.layout.fragment_navbar, container, false)
 
-        // Obtén una referencia a tu BottomNavigationView
+        // referencia a  BottomNavigationView
         val bottomNavigationView: BottomNavigationView = view.findViewById(R.id.bottom_navigation)
 
-        // Establece el listener para la selección de elementos
-        bottomNavigationView.setOnItemSelectedListener(this)
+        bottomNavigationView.setOnItemSelectedListener { item ->
+            when(item.itemId) {
+                R.id.item_1 -> {
+                    // Respond to navigation item 1 click
+                    true
+                }
+                R.id.item_2 -> {
+                    // Respond to navigation item 2 click
+                    true
+                } R.id.item_3-> {
+                    val intent = Intent(activity, PerfilActivity::class.java)
+                    // Iniciar la otra actividad
+                    startActivity(intent)
 
-        // Inflate the layout for this fragment
+                    true
+                }
+
+                else -> false
+            }
+        }
+
         return inflater.inflate(R.layout.fragment_navbar, container, false)
     }
 
@@ -94,4 +90,6 @@ class NavbarFragment : Fragment(), NavigationBarView.OnItemSelectedListener {
                 }
             }
     }
+
+
 }

@@ -5,10 +5,6 @@ e
 5app/src/main/java/com/example/appcine/MainActivity.kt,d\9\d9f6c6169c89e8f6ce1c56fd0a75c915b4091267
 D
 app/build.gradle.kts,d\2\d2a4383452aad84a18429a5844d31330a012a9e6
-h
-8app/src/main/java/com/example/appcine/fragment_navbar.kt,d\4\d42bb46815d54ee469998a754a32b6e1b5e3c967
-g
-7app/src/main/java/com/example/appcine/FragmentNavbar.kt,4\1\410a4e355be8d9b36a67b7487ce97292d1dc72ec
 g
 7app/src/main/java/com/example/appcine/NavbarFragment.kt,5\4\54a3b9f89f9d81d4d1f5b33f04f06ca6d2535740
 Å
@@ -33,3 +29,7 @@ p
 Q.idea/sonarlint/securityhotspotstore/4/3/431912591780612f3b0df7ec0136ab82ecad66af,e\b\eb5d97f25510545a119cb2ea5e7dd0b9b1b46f0d
 Å
 Q.idea/sonarlint/securityhotspotstore/2/8/2832a5324fe9e2c6bda68af7e7893a96019cc94b,3\8\383fb4e67c0dcee4e5949fdaf0a5475863a56db4
+g
+7app/src/main/java/com/example/appcine/PerfilActivity.kt,4\0\404a244a32ab8a8cb980941cab6d6414168c8bfe
+P
+ app/src/main/AndroidManifest.xml,8\c\8c55c3ccc257e5907959013f99656e4c8ec3903e
