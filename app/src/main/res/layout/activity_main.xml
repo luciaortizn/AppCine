@@ -24,7 +24,7 @@
 
         <com.google.android.material.search.SearchView
             android:layout_width="match_parent"
-            android:layout_height="300dp"
+            android:layout_height="match_parent"
             android:hint="@string/searchbar_hint"
             app:layout_anchor="@id/search_bar">
             <!-- Search suggestions/results go here (ScrollView, RecyclerView, etc.). -->

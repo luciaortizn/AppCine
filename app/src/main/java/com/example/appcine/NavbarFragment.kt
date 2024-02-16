@@ -40,8 +40,8 @@ class NavbarFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-
-        //Código para cambiar de navegación
+        /*
+        *  //Código para cambiar de navegación
         val view = inflater.inflate(R.layout.fragment_navbar, container, false)
 
         // referencia a  BottomNavigationView
@@ -66,9 +66,13 @@ class NavbarFragment : Fragment() {
 
                 else -> false
             }
-        }
+            *
+            *   }
 
         return inflater.inflate(R.layout.fragment_navbar, container, false)
+        * */
+
+      return null
     }
 
     companion object {
