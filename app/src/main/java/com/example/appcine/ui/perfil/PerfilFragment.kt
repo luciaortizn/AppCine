@@ -1,4 +1,4 @@
-package com.example.appcine.ui.notifications
+package com.example.appcine.ui.perfil
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,7 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.appcine.databinding.FragmentNotificationsBinding
 
 
-class NotificationsFragment : Fragment() {
+class PerfilFragment : Fragment() {
 
     private var _binding: FragmentNotificationsBinding? = null
 

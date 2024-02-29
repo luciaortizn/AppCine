@@ -1,4 +1,4 @@
-package com.example.appcine.ui.notifications
+package com.example.appcine.ui.perfil
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
