@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "577907861011",
+    "firebase_url": "https://appcine-1abac-default-rtdb.firebaseio.com",
+    "project_id": "appcine-1abac",
+    "storage_bucket": "appcine-1abac.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:577907861011:android:e745479717c49b0e9bc1e6",
+        "android_client_info": {
+          "package_name": "com.example.appcine"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAZwFac9B6qGzg3IorvKMLvNmC2h_qMzY8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

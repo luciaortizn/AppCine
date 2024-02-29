@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/splash_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="60dp"
+            android:gravity="center"
+            android:scaleX="2"
+            android:scaleY="3"
+            android:text="@string/login_button"
+            android:textColor="#000000"
+            android:layout_marginBottom="30dp"
+            android:textSize="45dp" />
+
+        <View
+            android:layout_width="350dp"
+            android:layout_height="2dp"
+            android:layout_marginBottom="160dp"
+            android:background="#000000" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:paddingHorizontal="20dp"
+            android:orientation="vertical" >
+
+            <!-- Campo de entrada para el nombre de usuario -->
+            <EditText
+                android:id="@+id/editTextEmail"
+                android:layout_marginBottom="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColorHint="@color/black"
+                android:hint="@string/username"
+                android:backgroundTint="@color/black"/>
+
+            <!-- Campo de entrada para la contraseña -->
+            <EditText
+                android:id="@+id/editTextPassword"
+                android:layout_marginBottom="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                android:textColorHint="@color/black"
+                android:hint="@string/password"
+                android:backgroundTint="@color/black"/>
+
+            <!-- Botón de registro -->
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnLogIn"
+                android:layout_width="340dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/button_form"
+                android:textSize="20dp"
+                android:text="@string/login_button"
+                android:textColor="@color/black"/>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="20dp">
+
+                <!-- Pregunta si ya tienes una cuenta -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/register"
+                    android:textSize="16sp"
+                    android:textColor="@color/black"/>
+
+                <!-- Enlace para redirigir al usuario a la pantalla de inicio de sesión -->
+                <TextView
+                    android:id="@+id/changeSignIn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/registerChange"
+                    android:textSize="16sp"
+                    android:layout_marginLeft="5dp"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</FrameLayout>

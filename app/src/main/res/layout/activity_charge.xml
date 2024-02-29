@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    android:orientation="vertical"
+    tools:context=".Charge">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/splash_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="140dp"
+            android:gravity="center"
+            android:scaleX="2"
+            android:scaleY="3"
+            android:text="@string/app_name"
+            android:textColor="#000000"
+            android:layout_marginBottom="30dp"
+            android:textSize="45dp" />
+
+        <View
+            android:layout_width="350dp"
+            android:layout_height="3dp"
+            android:layout_marginBottom="320dp"
+            android:background="#000000" />
+
+
+        <!-- Layout adicional para los textos y botones -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <!-- Botón 1 -->
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/login_button"
+                android:layout_width="340dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="25dp"
+                android:background="@drawable/button_form"
+                android:textSize="20dp"
+                android:text="@string/login_button"
+                android:textColor="@color/black" />
+
+            <!-- Botón 2 -->
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/register_button"
+                android:layout_width="340dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/button_form"
+                android:textSize="20dp"
+                android:text="@string/register_button"
+                android:textColor="@color/black" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</FrameLayout>

@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/background"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/splash_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="60dp"
+            android:gravity="center"
+            android:scaleX="2"
+            android:scaleY="3"
+            android:text="@string/register_button"
+            android:textColor="#000000"
+            android:layout_marginBottom="30dp"
+            android:textSize="45dp" />
+
+        <View
+            android:layout_width="350dp"
+            android:layout_height="2dp"
+            android:layout_marginBottom="40dp"
+            android:background="#000000" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:paddingHorizontal="20dp"
+            android:orientation="vertical" >
+
+            <!-- Username -->
+            <EditText
+                android:id="@+id/editTextEmail"
+                android:layout_marginBottom="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColorHint="@color/black"
+                android:hint="@string/email"
+                android:backgroundTint="@color/black"/>
+
+            <EditText
+                android:id="@+id/editTextUsername"
+                android:layout_marginBottom="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColorHint="@color/black"
+                android:hint="@string/username"
+                android:backgroundTint="@color/black"/>
+
+            <!-- Name -->
+            <EditText
+                android:id="@+id/editTextFirstName"
+                android:layout_marginBottom="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColorHint="@color/black"
+                android:hint="@string/name"
+                android:backgroundTint="@color/black"/>
+
+            <!-- Lastname -->
+            <EditText
+                android:id="@+id/editTextLastName"
+                android:layout_marginBottom="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColorHint="@color/black"
+                android:hint="@string/lastName"
+                android:backgroundTint="@color/black"/>
+
+            <!-- Password -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/editTextPassword"
+                    android:layout_marginBottom="20dp"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPassword"
+                    android:textColorHint="@color/black"
+                    android:hint="@string/password"
+                    android:backgroundTint="@color/black"
+                    android:tag="password"/>
+
+                <!-- Toggle button for password visibility -->
+                <ImageView
+                    android:id="@+id/passwordVisibilityToggle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="33dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="10dp"
+                    app:srcCompat="@drawable/ic_blind_50"
+                    android:clickable="true"
+                    android:onClick="passwordVisibility"/>
+            </LinearLayout>
+
+            <!-- Repeat Password -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/editTextRepeatPassword"
+                    android:layout_marginBottom="20dp"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPassword"
+                    android:textColorHint="@color/black"
+                    android:hint="@string/repeatPassword"
+                    android:backgroundTint="@color/black"
+                    android:tag="password"/>
+
+                <!-- Toggle button for password visibility -->
+                <ImageView
+                    android:id="@+id/repeatPasswordVisibilityToggle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="33dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="10dp"
+                    app:srcCompat="@drawable/ic_blind_50"
+                    android:clickable="true"
+                    android:onClick="repeatPasswordVisibility"/>
+            </LinearLayout>
+
+            <!-- Botón de registro -->
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnRegister"
+                android:layout_width="340dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/button_form"
+                android:textSize="20dp"
+                android:text="@string/register_button"
+                android:textColor="@color/black"/>
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="20dp">
+
+                <!-- Pregunta si ya tienes una cuenta -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/account"
+                    android:textSize="16sp"
+                    android:textColor="@color/black"/>
+
+                <!-- Enlace para redirigir al usuario a la pantalla de inicio de sesión -->
+                <TextView
+                    android:id="@+id/changeLogIn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/loginChange"
+                    android:textSize="16sp"
+                    android:layout_marginLeft="5dp"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</FrameLayout>
