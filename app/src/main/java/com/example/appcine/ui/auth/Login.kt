@@ -71,6 +71,7 @@ class Login : AppCompatActivity() {
                                 overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
                                 finish()
                                 saveLoginState(true)
+                                saveUserData(userData)
                                 return
                             }
                         }
@@ -126,6 +127,19 @@ class Login : AppCompatActivity() {
         val sharedPreferences = getSharedPreferences("myPrefs",  Context.MODE_PRIVATE)
         val editor = sharedPreferences.edit()
         editor.putBoolean("isLogged", isLogged)
+        editor.apply()
+    }
+
+    private fun saveUserData(userData: UserData) {
+        val sharedPreferences =
+            getSharedPreferences("myPrefs", Context.MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        editor.putString("id", userData.id)
+        editor.putString("email", userData.email)
+        editor.putString("username", userData.username)
+        editor.putString("firstName", userData.firstName)
+        editor.putString("lastName", userData.lastName)
+        editor.putString("password", userData.password)
         editor.apply()
     }
 }

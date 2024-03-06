@@ -100,11 +100,11 @@
                 <!-- Toggle button for password visibility -->
                 <ImageView
                     android:id="@+id/passwordVisibilityToggle"
-                    android:layout_width="wrap_content"
+                    android:layout_width="50dp"
                     android:layout_height="33dp"
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="10dp"
-                    app:srcCompat="@drawable/ic_blind_50"
+                    app:srcCompat="@drawable/ic_visibility_24"
                     android:clickable="true"
                     android:onClick="passwordVisibility"/>
             </LinearLayout>
@@ -130,11 +130,11 @@
                 <!-- Toggle button for password visibility -->
                 <ImageView
                     android:id="@+id/repeatPasswordVisibilityToggle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="33dp"
+                    android:layout_width="50dp"
+                    android:layout_height="36dp"
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="10dp"
-                    app:srcCompat="@drawable/ic_blind_50"
+                    app:srcCompat="@drawable/ic_visibility_24"
                     android:clickable="true"
                     android:onClick="repeatPasswordVisibility"/>
             </LinearLayout>

@@ -1,5 +1,6 @@
 package com.example.appcine
 
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -15,8 +16,19 @@ class Splash : AppCompatActivity() {
         supportActionBar?.hide()
 
         Handler().postDelayed({
-            val intent = Intent(this@Splash, Charge::class.java)
-            startActivity(intent)
+            // Verificar si el usuario ya ha iniciado sesión
+            if (isLoggedIn()) {
+                val intent = Intent(this@Splash, MainActivity2::class.java)
+                startActivity(intent)
+            } else {
+                val intent = Intent(this@Splash, Charge::class.java)
+                startActivity(intent)
+            }
         }, splashTime)
+    }
+
+    private fun isLoggedIn(): Boolean {
+        val sharedPreferences = getSharedPreferences("myPrefs", Context.MODE_PRIVATE)
+        return sharedPreferences.getBoolean("isLogged", false)
     }
 }

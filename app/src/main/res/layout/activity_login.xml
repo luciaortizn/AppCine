@@ -21,7 +21,7 @@
             android:scaleX="2"
             android:scaleY="3"
             android:text="@string/login_button"
-            android:textColor="#000000"
+            android:textColor="@color/white"
             android:layout_marginBottom="30dp"
             android:textSize="45dp" />
 
@@ -29,7 +29,7 @@
             android:layout_width="350dp"
             android:layout_height="2dp"
             android:layout_marginBottom="160dp"
-            android:background="#000000" />
+            android:background="@color/white" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -44,9 +44,9 @@
                 android:layout_marginBottom="20dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColorHint="@color/black"
+                android:textColorHint="@color/white"
                 android:hint="@string/username"
-                android:backgroundTint="@color/black"/>
+                android:backgroundTint="@color/white"/>
 
             <!-- Campo de entrada para la contraseña -->
             <EditText
@@ -55,9 +55,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textPassword"
-                android:textColorHint="@color/black"
+                android:textColorHint="@color/white"
                 android:hint="@string/password"
-                android:backgroundTint="@color/black"/>
+                android:backgroundTint="@color/white"/>
 
             <!-- Botón de registro -->
             <androidx.appcompat.widget.AppCompatButton
@@ -81,7 +81,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/register"
                     android:textSize="16sp"
-                    android:textColor="@color/black"/>
+                    android:textColor="@color/white"/>
 
                 <!-- Enlace para redirigir al usuario a la pantalla de inicio de sesión -->
                 <TextView

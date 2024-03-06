@@ -109,10 +109,6 @@ class Register : AppCompatActivity() {
         }
     }
 
-    private fun signInWithGoogle () {
-
-    }
-
     private fun validateFields(email: String, username: String, firstName: String, lastName: String, password: String, confirmPassword: String): Any {
         return when {
             isAnyFieldEmpty(email, username, firstName, lastName, password, confirmPassword) -> ValidationResult.EMPTY_FIELD
@@ -219,10 +215,10 @@ class Register : AppCompatActivity() {
         if (isPasswordVisible) {
             // Oculta la contraseña
             passwordEditText.transformationMethod = PasswordTransformationMethod.getInstance()
-            passwordVisibilityToggle.setImageResource(R.drawable.ic_blind_50)
+            passwordVisibilityToggle.setImageResource(R.drawable.ic_visibility_24) //CAMBIAR CON EL DE NO VISIBLE
         } else {
             passwordEditText.transformationMethod = null
-            passwordVisibilityToggle.setImageResource(R.drawable.ic_eye_50)
+            passwordVisibilityToggle.setImageResource(R.drawable.ic_visibility_24)
         }
 
         passwordEditText.typeface = currentTypeface
@@ -238,10 +234,10 @@ class Register : AppCompatActivity() {
 
         if (isRepeatPasswordVisible) {
             repeatPasswordEditText.transformationMethod = PasswordTransformationMethod.getInstance()
-            repeatPasswordVisibilityToggle.setImageResource(R.drawable.ic_blind_50)
+            repeatPasswordVisibilityToggle.setImageResource(R.drawable.ic_visibility_24) //CAMBIAR CON EL DE NO VISIBLE
         } else {
             repeatPasswordEditText.transformationMethod = null
-            repeatPasswordVisibilityToggle.setImageResource(R.drawable.ic_eye_50)
+            repeatPasswordVisibilityToggle.setImageResource(R.drawable.ic_visibility_24)
         }
 
         repeatPasswordEditText.setSelection(repeatPasswordEditText.text.length)
