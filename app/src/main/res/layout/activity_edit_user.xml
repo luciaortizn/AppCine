@@ -63,6 +63,26 @@
             android:inputType="text"
             android:padding="10dp" />
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="20dp">
+
+            <Button
+                android:id="@+id/btnCerrarSesion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Cerrar Sesión" />
+
+            <Button
+                android:id="@+id/btnEliminarCuenta"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Eliminar Cuenta"
+                android:layout_marginStart="10dp" />
+        </LinearLayout>
+
     </LinearLayout>
 
     <ImageView

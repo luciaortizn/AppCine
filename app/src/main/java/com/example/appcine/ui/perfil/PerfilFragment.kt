@@ -11,7 +11,11 @@ import androidx.fragment.app.Fragment
 import com.example.appcine.R
 import com.example.appcine.databinding.FragmentUserBinding
 import com.example.appcine.ui.editUser.EditUser
-import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 
 class PerfilFragment : Fragment() {
 
@@ -31,22 +35,7 @@ class PerfilFragment : Fragment() {
         _binding = FragmentUserBinding.inflate(inflater, container, false)
         val view = binding.root
 
-        sharedPreferences = requireActivity().getSharedPreferences("myPrefs", Context.MODE_PRIVATE)
-
-        val username = sharedPreferences.getString("username", "")
-        val firstName = sharedPreferences.getString("firstName", "")
-
-        val userId = FirebaseAuth.getInstance().currentUser?.uid
-
-        if (username != null && firstName != null) {
-            println("Username: $username")
-            println("First Name: $firstName")
-        }
-
-        val formattedUsername = "@$username"
-
-        binding.textFirstName.text = firstName
-        binding.textUsername.text = formattedUsername
+        getUserData()
 
         binding.btnEditProfile.setOnClickListener{
             val intent = Intent(activity, EditUser::class.java)
@@ -55,6 +44,34 @@ class PerfilFragment : Fragment() {
         }
 
         return  view
+    }
+
+    private fun getUserData() {
+        val sharedPreferences = requireActivity().getSharedPreferences("myPrefs", Context.MODE_PRIVATE)
+        val userId = sharedPreferences.getString("uid", "")
+
+        val userRef = FirebaseDatabase.getInstance().reference.child("users").child(userId!!)
+
+        userRef.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                val username = snapshot.child("username").getValue(String::class.java)
+                val firstName = snapshot.child("firstName").getValue(String::class.java)
+
+                if (username != null && firstName != null) {
+                    println("Username: $username")
+                    println("First Name: $firstName")
+
+                    val formattedUsername = "@$username"
+
+                    binding.textFirstName.text = firstName
+                    binding.textUsername.text = formattedUsername
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                // Handle error
+            }
+        })
     }
 
     override fun onDestroyView() {

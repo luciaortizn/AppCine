@@ -20,9 +20,11 @@ class Splash : AppCompatActivity() {
             if (isLoggedIn()) {
                 val intent = Intent(this@Splash, MainActivity2::class.java)
                 startActivity(intent)
+                overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
             } else {
                 val intent = Intent(this@Splash, Charge::class.java)
                 startActivity(intent)
+                overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
             }
         }, splashTime)
     }
