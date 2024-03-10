@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import com.example.appcine.R
 import com.example.appcine.databinding.FragmentUserBinding
 import com.example.appcine.ui.editUser.EditUser
+import com.google.firebase.auth.FirebaseAuth
 
 class PerfilFragment : Fragment() {
 
@@ -34,6 +35,8 @@ class PerfilFragment : Fragment() {
 
         val username = sharedPreferences.getString("username", "")
         val firstName = sharedPreferences.getString("firstName", "")
+
+        val userId = FirebaseAuth.getInstance().currentUser?.uid
 
         if (username != null && firstName != null) {
             println("Username: $username")

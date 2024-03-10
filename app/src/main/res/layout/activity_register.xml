@@ -69,15 +69,6 @@
                 android:hint="@string/name"
                 android:backgroundTint="@color/black"/>
 
-            <!-- Lastname -->
-            <EditText
-                android:id="@+id/editTextLastName"
-                android:layout_marginBottom="20dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColorHint="@color/black"
-                android:hint="@string/lastName"
-                android:backgroundTint="@color/black"/>
 
             <!-- Password -->
             <LinearLayout

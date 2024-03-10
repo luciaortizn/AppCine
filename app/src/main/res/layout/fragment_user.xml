@@ -28,21 +28,21 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/textFirstName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/name"
-                android:layout_gravity="center_vertical"
-                android:textSize="18sp"
-                android:layout_marginBottom="10dp"/>
-
-            <TextView
                 android:id="@+id/textUsername"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/username"
                 android:layout_gravity="center_vertical"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                android:layout_marginBottom="10dp"/>
+
+            <TextView
+                android:id="@+id/textFirstName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/name"
+                android:layout_gravity="center_vertical"
+                android:textSize="18sp"/>
         </LinearLayout>
 
     </LinearLayout>

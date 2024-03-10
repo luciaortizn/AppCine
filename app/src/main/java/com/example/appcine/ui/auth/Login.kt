@@ -134,11 +134,10 @@ class Login : AppCompatActivity() {
         val sharedPreferences =
             getSharedPreferences("myPrefs", Context.MODE_PRIVATE)
         val editor = sharedPreferences.edit()
-        editor.putString("id", userData.id)
+        editor.putString("uid", userData.uid)
         editor.putString("email", userData.email)
         editor.putString("username", userData.username)
         editor.putString("firstName", userData.firstName)
-        editor.putString("lastName", userData.lastName)
         editor.putString("password", userData.password)
         editor.apply()
     }

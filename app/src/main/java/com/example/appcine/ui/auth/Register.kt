@@ -50,9 +50,8 @@ class Register : AppCompatActivity() {
             val password = binding.editTextPassword.text.toString()
             val confirmPassword = binding.editTextRepeatPassword.text.toString()
             val firstName = binding.editTextFirstName.text.toString()
-            val lastName = binding.editTextLastName.text.toString()
 
-            registerUser(email, username, firstName, lastName, password, confirmPassword)
+            registerUser(email, username, firstName, password, confirmPassword)
         }
 
         binding.changeLogIn.setOnClickListener {
@@ -68,11 +67,10 @@ class Register : AppCompatActivity() {
         email: String,
         username: String,
         firstName: String,
-        lastName: String,
         password: String,
         confirmPassword: String
     ) {
-        val validationResult = validateFields(email, username, firstName, lastName, password, confirmPassword)
+        val validationResult = validateFields(email, username, firstName, password, confirmPassword)
 
         if (validationResult == ValidationResult.SUCCESS) {
 
@@ -82,7 +80,7 @@ class Register : AppCompatActivity() {
                     if (!dataSnapshot.exists()){
                         val id = databaseRerence.push().key
 
-                        val userData = UserData(id, email, username, firstName, lastName, PasswordEncrypt.hashPassword(password))
+                        val userData = UserData(id, email, username, firstName, PasswordEncrypt.hashPassword(password))
 
                         databaseRerence.child(id!!).setValue(userData)
 
@@ -109,12 +107,11 @@ class Register : AppCompatActivity() {
         }
     }
 
-    private fun validateFields(email: String, username: String, firstName: String, lastName: String, password: String, confirmPassword: String): Any {
+    private fun validateFields(email: String, username: String, firstName: String,  password: String, confirmPassword: String): Any {
         return when {
-            isAnyFieldEmpty(email, username, firstName, lastName, password, confirmPassword) -> ValidationResult.EMPTY_FIELD
+            isAnyFieldEmpty(email, username, firstName, password, confirmPassword) -> ValidationResult.EMPTY_FIELD
             containsWhiteSpace(email, username, password, confirmPassword) -> ValidationResult.WHITESPACE_IN_FIELD
             !isEmailValid(email) -> ValidationResult.INVALID_EMAIL
-            containsNumbers(firstName, lastName) -> ValidationResult.INVALID_NAME_OR_LASTNAME
             !doPasswordsMatch(password, confirmPassword) -> ValidationResult.PASSWORDS_NOT_MATCH
             !isPasswordStrongEnough(password) -> ValidationResult.WEAK_PASSWORD
             else -> ValidationResult.SUCCESS
@@ -166,7 +163,6 @@ class Register : AppCompatActivity() {
         val errorMessage = when (validationResult) {
             ValidationResult.EMPTY_FIELD -> "Please fill in all fields."
             ValidationResult.INVALID_EMAIL -> "Please enter a valid email address."
-            ValidationResult.INVALID_NAME_OR_LASTNAME -> "Please enter a valid name/lastname."
             ValidationResult.PASSWORDS_NOT_MATCH -> "Passwords do not match."
             ValidationResult.WEAK_PASSWORD -> "Password does not meet the minimum requirements."
             else -> "Please check your entries."
@@ -195,7 +191,6 @@ class Register : AppCompatActivity() {
         SUCCESS,
         INVALID_EMAIL,
         EMPTY_FIELD,
-        INVALID_NAME_OR_LASTNAME,
         PASSWORDS_NOT_MATCH,
         WEAK_PASSWORD,
         WHITESPACE_IN_FIELD
