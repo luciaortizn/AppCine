@@ -5,5 +5,6 @@ data class UserData(
     val email: String? = null,
     val username: String? = null,
     val firstName: String? = null,
-    val password: String? = null
+    val password: String? = null,
+    val profileImage: String? = null
 )

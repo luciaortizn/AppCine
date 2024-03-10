@@ -70,48 +70,75 @@ class EditUser : AppCompatActivity() {
             val newUsername = editTextUsername.text.toString()
             val newFirstName = editTextUser.text.toString()
 
-            if (newUsername.isNotEmpty() && newFirstName.isNotEmpty()) {
-                val userRef = databaseReference.child(userId!!) //"-NscI2nqNov0WVVuIrCj"
+            // Verificar si al menos el campo de nombre está lleno
+            if (newFirstName.isNotEmpty()) {
+                val userRef = databaseReference.child(userId!!)
 
-                databaseReference.orderByChild("username").equalTo(newUsername)
-                    .addListenerForSingleValueEvent(object : ValueEventListener {
-                        override fun onDataChange(dataSnapshot: DataSnapshot) {
-                            if (!dataSnapshot.exists()) {
-                                // El nombre de usuario no está en uso, se puede guardar el cambio
-                                val userMap = HashMap<String, Any>()
-                                userMap["username"] = newUsername
-                                userMap["firstName"] = newFirstName
+                // Si el nombre de usuario no ha cambiado, simplemente actualiza el nombre
+                if (newUsername == username) {
+                    val userMap = HashMap<String, Any>()
+                    userMap["firstName"] = newFirstName
 
-                                userRef.updateChildren(userMap)
-                                    .addOnCompleteListener { task ->
-                                        if (task.isSuccessful) {
-                                            Toast.makeText(this@EditUser, "Datos actualizados", Toast.LENGTH_SHORT).show()
+                    userRef.updateChildren(userMap)
+                        .addOnCompleteListener { task ->
+                            if (task.isSuccessful) {
+                                Toast.makeText(this@EditUser, "Datos actualizados", Toast.LENGTH_SHORT).show()
 
-                                            sharedPreferences.edit().apply {
-                                                putString("username", newUsername)
-                                                putString("firstName", newFirstName)
-                                                apply()
-                                            }
+                                sharedPreferences.edit().apply {
+                                    putString("firstName", newFirstName)
+                                    apply()
+                                }
 
-                                            finish()
-                                        } else {
-                                            Toast.makeText(this@EditUser, "Error al actualizar", Toast.LENGTH_SHORT).show()
-                                        }
-                                    }
+                                finish()
                             } else {
-                                // El nombre de usuario está en uso
-                                Toast.makeText(this@EditUser, "El nombre de usuario ya está en uso", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(this@EditUser, "Error al actualizar", Toast.LENGTH_SHORT).show()
                             }
                         }
+                } else {
+                    // Si el nombre de usuario ha cambiado, realiza la validación completa
+                    if (newUsername.isNotEmpty()) {
+                        databaseReference.orderByChild("username").equalTo(newUsername)
+                            .addListenerForSingleValueEvent(object : ValueEventListener {
+                                override fun onDataChange(dataSnapshot: DataSnapshot) {
+                                    if (!dataSnapshot.exists()) {
+                                        // El nombre de usuario no está en uso, se puede guardar el cambio
+                                        val userMap = HashMap<String, Any>()
+                                        userMap["username"] = newUsername
+                                        userMap["firstName"] = newFirstName
 
-                        override fun onCancelled(databaseError: DatabaseError) {
-                            // Manejar error en la consulta
-                            Toast.makeText(this@EditUser, "Error al consultar la base de datos", Toast.LENGTH_SHORT).show()
-                        }
-                    })
+                                        userRef.updateChildren(userMap)
+                                            .addOnCompleteListener { task ->
+                                                if (task.isSuccessful) {
+                                                    Toast.makeText(this@EditUser, "Datos actualizados", Toast.LENGTH_SHORT).show()
 
+                                                    sharedPreferences.edit().apply {
+                                                        putString("username", newUsername)
+                                                        putString("firstName", newFirstName)
+                                                        apply()
+                                                    }
+
+                                                    finish()
+                                                } else {
+                                                    Toast.makeText(this@EditUser, "Error al actualizar", Toast.LENGTH_SHORT).show()
+                                                }
+                                            }
+                                    } else {
+                                        // El nombre de usuario está en uso
+                                        Toast.makeText(this@EditUser, "El nombre de usuario ya está en uso", Toast.LENGTH_SHORT).show()
+                                    }
+                                }
+
+                                override fun onCancelled(databaseError: DatabaseError) {
+                                    // Manejar error en la consulta
+                                    Toast.makeText(this@EditUser, "Error al consultar la base de datos", Toast.LENGTH_SHORT).show()
+                                }
+                            })
+                    } else {
+                        Toast.makeText(this@EditUser, "Por favor, complete todos los campos", Toast.LENGTH_SHORT).show()
+                    }
+                }
             } else {
-                Toast.makeText(this@EditUser, "Por favor, complete todos los campos", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@EditUser, "Por favor, complete al menos el campo del nombre", Toast.LENGTH_SHORT).show()
             }
         }
 
@@ -205,9 +232,17 @@ class EditUser : AppCompatActivity() {
             val imageBitmap = data?.extras?.get("data") as Bitmap?
             val circleImageView = findViewById<ImageView>(R.id.circle)
 
-            // Recortar la imagen en forma circular
-            val scaledBitmap = Bitmap.createScaledBitmap(imageBitmap!!, circleImageView.width, circleImageView.height, true)
-            circleImageView.setImageBitmap(scaledBitmap)
+            if (imageBitmap != null) {
+                //Redimensionar la imagen
+                val resizedBitmap = Bitmap.createScaledBitmap(imageBitmap, 100, 100, true)
+
+                // Recortar la imagen en forma circular
+                val circularBitmap = getCircularBitmap(resizedBitmap)
+                circleImageView.setImageBitmap(circularBitmap)
+
+            } else {
+                Toast.makeText(this, "Error al obtener la imagen", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 
@@ -217,17 +252,14 @@ class EditUser : AppCompatActivity() {
 
         val paint = Paint()
         val rect = Rect(0, 0, bitmap.width, bitmap.height)
-        val rectF = RectF(rect)
 
-        paint.isAntiAlias = true
         canvas.drawARGB(0, 0, 0, 0)
-        canvas.drawOval(rectF, paint)
+        canvas.drawCircle(bitmap.width / 2f, bitmap.height / 2f, bitmap.width / 2f, paint)
 
         paint.xfermode = PorterDuffXfermode(PorterDuff.Mode.SRC_IN)
         canvas.drawBitmap(bitmap, rect, rect, paint)
 
         return output
     }
-
 
 }
