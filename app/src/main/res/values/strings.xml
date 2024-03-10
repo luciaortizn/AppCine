@@ -27,4 +27,6 @@
     <string name="editPhoto">Editar foto</string>
     <string name="nombre">Nombre</string>
     <string name="usuario">Nombre de usuario</string>
+    <string name="tomar_foto">Tomar foto</string>
+    <string name="foto_existente">Elegir foto existente</string>
 </resources>
