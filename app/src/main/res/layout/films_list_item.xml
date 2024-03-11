@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/miFilm"
+    app:cardCornerRadius="10dp"
+    android:layout_marginVertical="10dp"
+    android:layout_marginHorizontal="10dp"
+    app:cardElevation="10dp"
+    android:backgroundTint="@color/white"
+    android:layout_height="wrap_content">
+   <LinearLayout
+       android:layout_width="wrap_content"
+       android:orientation="vertical"
+       android:layout_height="wrap_content" >
+       <ImageView
+           android:id="@+id/imgFilm"
+           android:layout_width="130dp"
+           android:layout_height="100dp"
+           android:clickable="true"
+           android:adjustViewBounds="true"
+           android:scaleType="fitXY"
+           android:src="@drawable/ic_add_a_photo_24"
+           android:contentDescription="@string/item_que_representa_una_pel_cula"
+           android:focusable="true">
+       </ImageView>
+       <TextView
+           android:id="@+id/titleFilm"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:textColor="@color/black"
+           android:textSize="17sp"
+           android:text="Title"
+           android:paddingStart="20dp">
+
+       </TextView>
+   </LinearLayout>
+</androidx.cardview.widget.CardView>

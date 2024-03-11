@@ -29,4 +29,5 @@
     <string name="usuario">Nombre de usuario</string>
     <string name="tomar_foto">Tomar foto</string>
     <string name="foto_existente">Elegir foto existente</string>
+    <string name="item_que_representa_una_pel_cula">item que representa una película</string>
 </resources>
