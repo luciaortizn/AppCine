@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/miFilm"
     android:layout_width="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/miFilm"
-    app:cardCornerRadius="10dp"
     android:layout_marginVertical="10dp"
     android:layout_marginHorizontal="10dp"
-    app:cardElevation="10dp"
+    app:cardElevation="5dp"
+    android:layoutDirection="ltr"
     android:backgroundTint="@color/white"
     android:layout_height="wrap_content">
    <LinearLayout
@@ -15,8 +15,8 @@
        android:layout_height="wrap_content" >
        <ImageView
            android:id="@+id/imgFilm"
-           android:layout_width="130dp"
-           android:layout_height="100dp"
+           android:layout_width="150dp"
+           android:layout_height="200dp"
            android:clickable="true"
            android:adjustViewBounds="true"
            android:scaleType="fitXY"
@@ -24,15 +24,41 @@
            android:contentDescription="@string/item_que_representa_una_pel_cula"
            android:focusable="true">
        </ImageView>
-       <TextView
-           android:id="@+id/titleFilm"
+       <LinearLayout
+           android:paddingStart="10dp"
            android:layout_width="wrap_content"
            android:layout_height="wrap_content"
-           android:textColor="@color/black"
-           android:textSize="17sp"
-           android:text="Title"
-           android:paddingStart="20dp">
+           android:orientation="horizontal">
 
-       </TextView>
+           <TextView
+               android:id="@+id/titleFilm"
+               android:layout_width="match_parent"
+               android:layout_gravity="center"
+               android:layout_height="wrap_content"
+               android:textColor="@color/black"
+               android:textSize="14sp"
+               android:text="Title"
+               android:paddingEnd="10dp"
+               android:paddingStart="10dp"
+               >
+           </TextView>
+           <ImageView
+               android:id="@+id/favoritesFilm"
+               android:layout_width="48dp"
+               android:paddingStart="0dp"
+               android:layout_height="48dp"
+               android:clickable="true"
+               android:layout_gravity="end|center"
+               android:adjustViewBounds="true"
+               android:scaleType="fitXY"
+               android:src="@drawable/outline_favorite_border_24"
+               android:contentDescription="@string/item_que_representa_una_pel_cula"
+               android:focusable="true">
+           </ImageView>
+
+
+       </LinearLayout>
+
+
    </LinearLayout>
 </androidx.cardview.widget.CardView>
