@@ -40,4 +40,11 @@
     <string name="trailer">TRAILER</string>
     <string name="tagline">Tagline</string>
     <string name="overview">Overview</string>
+    <string name="cast_crew">Cast + Crew</string>
+    <string name="genre">Genre</string>
+    <string name="cast">CAST</string>
+    <string name="crew">CREW</string>
+    <string name="character">Character</string>
+    <string name="job">Job</string>
+    <string name="generos_pelicula">Géneros</string>
 </resources>

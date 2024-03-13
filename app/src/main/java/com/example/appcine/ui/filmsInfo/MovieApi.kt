@@ -372,9 +372,9 @@ class MovieApi {
             })
         }
 
-        fun getProviders(movieId: Int, apiKey: String, callback: (List<Pair<String, String>>) -> Unit) {
+        fun getActors(movieId: Int, apiKey: String, callback: (List<Actor>?) -> Unit) {
             val request = Request.Builder()
-                .url("https://api.themoviedb.org/3/movie/$movieId/watch/providers")
+                .url("https://api.themoviedb.org/3/movie/$movieId/credits")
                 .get()
                 .addHeader("accept", "application/json")
                 .addHeader("Authorization", "Bearer $apiKey")
@@ -382,62 +382,147 @@ class MovieApi {
 
             client.newCall(request).enqueue(object : Callback {
                 override fun onFailure(call: Call, e: IOException) {
-                    callback(emptyList())
+                    callback(null)
                 }
 
                 override fun onResponse(call: Call, response: Response) {
                     response.use {
                         if (!response.isSuccessful) {
-                            callback(emptyList())
+                            callback(null)
                             return
                         }
 
                         val responseData = response.body()?.string()
                         responseData?.let {
                             val jsonObject = JSONObject(it)
-                            val resultsObject = jsonObject.optJSONObject("results")
-                            val usProvidersObject = resultsObject?.optJSONObject("US")
+                            val castArray = jsonObject.getJSONArray("cast")
 
-                            val providers = mutableListOf<Pair<String, String>>()
+                            val actors = mutableListOf<Actor>()
 
-                            // Obtener los proveedores de US si existen
-                            usProvidersObject?.let { usProviders ->
-                                usProviders.optJSONArray("flatrate")?.let { flatrateArray ->
-                                    for (i in 0 until flatrateArray.length()) {
-                                        val providerObject = flatrateArray.getJSONObject(i)
-                                        val providerName = providerObject.optString("provider_name")
-                                        val logoPath = providerObject.optString("logo_path")
-                                        providers.add(Pair(providerName, logoPath))
-                                    }
-                                }
+                            for (i in 0 until castArray.length()) {
+                                val castObject = castArray.getJSONObject(i)
+                                if (castObject.getString("known_for_department") == "Acting") {
+                                    val name = castObject.getString("name")
+                                    val character = castObject.getString("character")
+                                    val profilePath = castObject.optString("profile_path", "")
 
-                                usProviders.optJSONArray("buy")?.let { buyArray ->
-                                    for (i in 0 until buyArray.length()) {
-                                        val providerObject = buyArray.getJSONObject(i)
-                                        val providerName = providerObject.optString("provider_name")
-                                        val logoPath = providerObject.optString("logo_path")
-                                        providers.add(Pair(providerName, logoPath))
-                                    }
-                                }
-
-                                usProviders.optJSONArray("rent")?.let { rentArray ->
-                                    for (i in 0 until rentArray.length()) {
-                                        val providerObject = rentArray.getJSONObject(i)
-                                        val providerName = providerObject.optString("provider_name")
-                                        val logoPath = providerObject.optString("logo_path")
-                                        providers.add(Pair(providerName, logoPath))
+                                    // Verificar si el actor tiene una ruta de perfil válida
+                                    if (profilePath != "null") {
+                                        val actor = Actor(name, character, profilePath)
+                                        actors.add(actor)
                                     }
                                 }
                             }
 
-                            callback(providers)
+                            callback(actors)
                         } ?: run {
-                            callback(emptyList())
+                            callback(null)
                         }
                     }
                 }
             })
         }
+
+        data class Actor(val name: String, val character: String, val profilePath: String)
+
+        fun getRest(movieId: Int, apiKey: String, callback: (List<Rest>?) -> Unit) {
+            val request = Request.Builder()
+                .url("https://api.themoviedb.org/3/movie/$movieId/credits")
+                .get()
+                .addHeader("accept", "application/json")
+                .addHeader("Authorization", "Bearer $apiKey")
+                .build()
+
+            client.newCall(request).enqueue(object : Callback {
+                override fun onFailure(call: Call, e: IOException) {
+                    callback(null)
+                }
+
+                override fun onResponse(call: Call, response: Response) {
+                    response.use {
+                        if (!response.isSuccessful) {
+                            callback(null)
+                            return
+                        }
+
+                        val responseData = response.body()?.string()
+                        responseData?.let {
+                            val jsonObject = JSONObject(it)
+                            val restArray = jsonObject.getJSONArray("crew")
+
+                            val restList = mutableListOf<Rest>()
+
+                            for (i in 0 until restArray.length()) {
+                                val restObject = restArray.getJSONObject(i)
+                                if (restObject.getString("known_for_department") != "Acting") {
+                                    val name = restObject.getString("name")
+                                    val job = restObject.getString("job")
+                                    val profilePath = restObject.optString("profile_path", "")
+
+                                    // Verificar si el actor tiene una ruta de perfil válida
+                                    if (profilePath != "null") {
+                                        val rest = Rest(name, job, profilePath)
+                                        restList.add(rest)
+                                    }
+                                }
+                            }
+
+                            callback(restList)
+                        } ?: run {
+                            callback(null)
+                        }
+                    }
+                }
+            })
+        }
+
+        data class Rest(val name: String, val job: String, val profilePath: String)
+
+        fun getGenre(movieId: Int, apiKey: String, callback: (List<Genre>?) -> Unit) {
+            val request = Request.Builder()
+                .url("https://api.themoviedb.org/3/movie/$movieId")
+                .get()
+                .addHeader("accept", "application/json")
+                .addHeader("Authorization", "Bearer $apiKey")
+                .build()
+
+            client.newCall(request).enqueue(object : Callback {
+                override fun onFailure(call: Call, e: IOException) {
+                    callback(null)
+                }
+
+                override fun onResponse(call: Call, response: Response) {
+                    response.use {
+                        if (!response.isSuccessful) {
+                            callback(null)
+                            return
+                        }
+
+                        val responseData = response.body()?.string()
+                        responseData?.let {
+                            val jsonObject = JSONObject(it)
+                            val genreArray = jsonObject.getJSONArray("genres")
+
+                            val genreList = mutableListOf<Genre>()
+
+                            for (i in 0 until genreArray.length()) {
+                                val genreObject = genreArray.getJSONObject(i)
+                                val id = genreObject.getInt("id")
+                                val name = genreObject.getString("name")
+                                val genre = Genre(id, name)
+                                genreList.add(genre)
+                            }
+
+                            callback(genreList)
+                        } ?: run {
+                            callback(null)
+                        }
+                    }
+                }
+            })
+        }
+
+        data class Genre(val id: Int, val name: String)
 
     }
 }

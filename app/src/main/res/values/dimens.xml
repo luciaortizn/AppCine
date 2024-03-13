@@ -7,4 +7,5 @@
     <dimen name="provider_logo_margin">7dp</dimen>
     <dimen name="provider_logo_width">25dp</dimen>
     <dimen name="provider_logo_height">25dp</dimen>
+    <dimen name="text_size">6dp</dimen>
 </resources>
