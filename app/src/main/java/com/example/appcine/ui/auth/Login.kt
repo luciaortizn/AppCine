@@ -6,10 +6,8 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import com.example.appcine.MainActivity2
-import com.example.appcine.PasswordEncrypt
+import com.example.appcine.ui.common.MainActivity2
 import com.example.appcine.R
-import com.example.appcine.UserData
 import com.example.appcine.databinding.ActivityLoginBinding
 import com.google.firebase.database.*
 

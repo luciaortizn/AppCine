@@ -36,13 +36,13 @@
             android:name=".ui.auth.Register"
             android:exported="false" />
         <activity
-            android:name=".Charge"
+            android:name=".ui.auth.Charge"
             android:exported="false" />
         <activity
-            android:name=".MainActivity2"
+            android:name=".ui.common.MainActivity2"
             android:exported="false" />
         <activity
-            android:name=".Splash"
+            android:name=".ui.common.Splash"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -50,9 +50,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".MainActivity"
-            android:exported="true" />
     </application>
 
 </manifest>

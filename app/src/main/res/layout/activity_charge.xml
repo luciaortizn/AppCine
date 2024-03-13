@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/background"
     android:orientation="vertical"
-    tools:context=".Charge">
+    tools:context=".ui.auth.Charge">
 
     <ImageView
         android:layout_width="match_parent"

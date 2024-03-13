@@ -1,11 +1,10 @@
-package com.example.appcine
+package com.example.appcine.ui.auth
 
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatButton
-import com.example.appcine.ui.auth.Register
-import com.example.appcine.ui.auth.Login
+import com.example.appcine.R
 
 class Charge : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

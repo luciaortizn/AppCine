@@ -1,4 +1,4 @@
-package com.example.appcine
+package com.example.appcine.ui.common
 
 import android.content.Context
 import android.content.Intent
@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import com.example.appcine.R
+import com.example.appcine.ui.auth.Charge
 
 class Splash : AppCompatActivity() {
     private val splashTime: Long = 2000

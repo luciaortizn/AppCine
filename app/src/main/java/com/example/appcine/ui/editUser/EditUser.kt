@@ -10,7 +10,6 @@ import android.graphics.Paint
 import android.graphics.PorterDuff
 import android.graphics.PorterDuffXfermode
 import android.graphics.Rect
-import android.graphics.RectF
 import android.os.Bundle
 import android.provider.MediaStore
 import android.view.View
@@ -23,7 +22,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import com.example.appcine.Charge
+import com.example.appcine.ui.auth.Charge
 import com.example.appcine.R
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError

@@ -1,4 +1,4 @@
-package com.example.appcine
+package com.example.appcine.ui.common
 
 import android.os.Bundle
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -7,6 +7,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.example.appcine.R
 import com.example.appcine.databinding.ActivityMain2Binding
 
 class MainActivity2 : AppCompatActivity() {

@@ -1,4 +1,4 @@
-package com.example.appcine
+package com.example.appcine.ui.auth
 
 import java.security.MessageDigest
 
