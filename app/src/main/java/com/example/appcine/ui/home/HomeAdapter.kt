@@ -27,7 +27,7 @@ class HomeAdapter (private val dataList:ArrayList<Films>):RecyclerView.Adapter<H
             if (onClickListener != null){
                 onClickListener!!.onClick(position, currentItem)
             }
-          //  onItemClick?.invoke(currentItem)
+
 
         }
 

@@ -1,5 +1,6 @@
 package com.example.appcine.ui.favorites
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -14,6 +15,7 @@ import com.example.appcine.R
 import com.example.appcine.databinding.FragmentFavoritesBinding
 import com.example.appcine.ui.home.Films
 import com.example.appcine.ui.home.HomeAdapter
+import org.json.JSONArray
 
 class FavoritesFragment : Fragment() {
 
@@ -55,14 +57,37 @@ class FavoritesFragment : Fragment() {
         recyclerView.setHasFixedSize(true)
 
         favoritesList = arrayListOf<Films>()
-        getData()
+
     }
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
-    private fun getData() {
-        for (i in imageList.indices){}
-        recyclerView.adapter = HomeAdapter(favoritesList)
+    @SuppressLint("NotifyDataSetChanged")
+    private fun processMovies(results: JSONArray) {
+        // Limitar a solo 10 películas
+        val moviesToShow = minOf(results.length(), 10)
+
+        // Iterar a través de los primeros 10 resultados de películas
+        for (i in 0 until moviesToShow) {
+            val movieObject = results.getJSONObject(i)
+            var posterPath = movieObject.getString("poster_path")
+            val movieId = movieObject.getInt("id")
+
+            /*// Actualizar UI con el póster de la película
+            val imageView = ImageView(context)
+
+            // Cargar el póster usando la biblioteca Picasso
+            Picasso.get().load("https://image.tmdb.org/t/p/w500$posterPath").into(imageView)
+                **/
+            if(posterPath.isEmpty()|| posterPath.length<5){
+                posterPath = "https://lightwidget.com/wp-content/uploads/localhost-file-not-found.jpg";
+            }
+
+            favoritesList.add(Films(posterPath, movieId))
+
+        }
+        recyclerView.adapter?.notifyDataSetChanged()
+
     }
 }

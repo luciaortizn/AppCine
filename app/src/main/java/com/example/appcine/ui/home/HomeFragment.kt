@@ -191,11 +191,7 @@ class HomeFragment : Fragment() {
     //obtiene las películas buscadas
     private fun getSearchedString():String {
         val searchView = view?.findViewById<SearchView>(R.id.search_view)
-        return if (searchView != null) {
-            searchView.query.toString()
-        }else {
-            "No se han encontrado resultados"
-        }
+        return searchView?.query?.toString() ?: "No se han encontrado resultados"
     }
 
      private fun fetchSearchedFilms(query:String){
