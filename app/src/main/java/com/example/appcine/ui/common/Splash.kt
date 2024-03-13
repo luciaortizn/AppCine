@@ -34,4 +34,9 @@ class Splash : AppCompatActivity() {
         val sharedPreferences = getSharedPreferences("myPrefs", Context.MODE_PRIVATE)
         return sharedPreferences.getBoolean("isLogged", false)
     }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        finish()
+    }
 }

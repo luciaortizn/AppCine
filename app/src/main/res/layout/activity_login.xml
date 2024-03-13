@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/background"
     android:orientation="vertical">
 
@@ -49,15 +50,34 @@
                 android:backgroundTint="@color/white"/>
 
             <!-- Campo de entrada para la contraseña -->
-            <EditText
-                android:id="@+id/editTextPassword"
-                android:layout_marginBottom="20dp"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textPassword"
-                android:textColorHint="@color/white"
-                android:hint="@string/password"
-                android:backgroundTint="@color/white"/>
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/editTextPassword"
+                    android:layout_marginBottom="20dp"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPassword"
+                    android:textColorHint="@color/white"
+                    android:hint="@string/password"
+                    android:backgroundTint="@color/white"
+                    android:tag="password"/>
+
+                <!-- Toggle button for password visibility -->
+                <ImageView
+                    android:id="@+id/passwordVisibilityToggle"
+                    android:layout_width="50dp"
+                    android:layout_height="33dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="10dp"
+                    app:srcCompat="@drawable/ic_visibility_24"
+                    android:clickable="true"
+                    android:onClick="passwordVisibility"/>
+            </LinearLayout>
 
             <!-- Botón de registro -->
             <androidx.appcompat.widget.AppCompatButton

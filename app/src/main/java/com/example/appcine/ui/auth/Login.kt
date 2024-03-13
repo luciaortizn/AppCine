@@ -3,6 +3,10 @@ package com.example.appcine.ui.auth
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.text.method.PasswordTransformationMethod
+import android.view.View
+import android.widget.EditText
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -128,6 +132,36 @@ class Login : AppCompatActivity() {
         }
         val alertDialog = alertDialogBuilder.create()
         alertDialog.show()
+    }
+
+    fun passwordVisibility(view: View) {
+        val passwordEditText = findViewById<EditText>(R.id.editTextPassword)
+        val passwordVisibilityToggle = findViewById<ImageView>(R.id.passwordVisibilityToggle)
+
+        // Guarda el tipo de letra actual
+        val currentTypeface = passwordEditText.typeface
+
+        // Determina si la contraseña es visible o no
+        val isPasswordVisible = passwordEditText.transformationMethod == null
+
+        // Cambia la visibilidad de la contraseña y el icono
+        if (isPasswordVisible) {
+            // Oculta la contraseña
+            passwordEditText.transformationMethod = PasswordTransformationMethod.getInstance()
+            passwordVisibilityToggle.setImageResource(R.drawable.ic_hidden_24) //CAMBIAR CON EL DE NO VISIBLE
+        } else {
+            passwordEditText.transformationMethod = null
+            passwordVisibilityToggle.setImageResource(R.drawable.ic_visibility_24)
+        }
+
+        passwordEditText.typeface = currentTypeface
+
+        passwordEditText.setSelection(passwordEditText.text.length)
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        finish()
     }
 
     //guardar el estado (logeado)

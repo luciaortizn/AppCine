@@ -16,6 +16,7 @@ import android.text.TextUtils
 import android.view.Gravity
 import android.view.View
 import android.widget.Button
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -34,6 +35,8 @@ class FilmsInformation : AppCompatActivity() {
         val apiKey = "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzYzM2MDY4YjUxOTQ4MTJmODM2N2RhMWQxZmY3YjNmNyIsInN1YiI6IjY1YTBmOTkyNDQ3ZjljMDEyMjVhNjE1NiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ._Y48hLg92ILHsg8MsWJR6p01JUIRrRpF_m6bgI66pbo"
 
         val movieId = intent.getIntExtra("movieID", -1)
+
+        val backButton = findViewById<ImageButton>(R.id.backButton)
         val overviewTextView: TextView = findViewById(R.id.overview)
         val trailerView: TextView = findViewById(R.id.trailer)
 
@@ -43,6 +46,11 @@ class FilmsInformation : AppCompatActivity() {
         val layoutCast: LinearLayout = findViewById(R.id.layoutCast)
         val layoutCrew: LinearLayout = findViewById(R.id.layoutCrew)
         val layoutGeneros: LinearLayout = findViewById(R.id.layoutGeneros)
+
+        backButton.setOnClickListener {
+            onBackPressed()
+            finish()
+        }
 
         MovieApi.getMovieBackdrop(movieId, apiKey) { backdropPath ->
             runOnUiThread {

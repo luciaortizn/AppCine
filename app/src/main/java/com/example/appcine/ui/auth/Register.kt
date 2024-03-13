@@ -154,7 +154,7 @@ class Register : AppCompatActivity() {
         val lowerCaseRegex = Regex("[a-z]")
         val specialCharacterRegex = Regex("[^A-Za-z0-9]")
 
-        return password.length >= 8 &&
+        return password.length >= 4 &&
                 digitRegex.containsMatchIn(password) &&
                 upperCaseRegex.containsMatchIn(password) &&
                 lowerCaseRegex.containsMatchIn(password) &&
@@ -195,6 +195,10 @@ class Register : AppCompatActivity() {
         alertDialog.show()
     }
 
+    override fun onBackPressed() {
+        super.onBackPressed()
+        finish()
+    }
 
     enum class ValidationResult {
         SUCCESS,
@@ -220,7 +224,7 @@ class Register : AppCompatActivity() {
         if (isPasswordVisible) {
             // Oculta la contraseña
             passwordEditText.transformationMethod = PasswordTransformationMethod.getInstance()
-            passwordVisibilityToggle.setImageResource(R.drawable.ic_visibility_24) //CAMBIAR CON EL DE NO VISIBLE
+            passwordVisibilityToggle.setImageResource(R.drawable.ic_hidden_24) //CAMBIAR CON EL DE NO VISIBLE
         } else {
             passwordEditText.transformationMethod = null
             passwordVisibilityToggle.setImageResource(R.drawable.ic_visibility_24)
@@ -240,7 +244,7 @@ class Register : AppCompatActivity() {
 
         if (isRepeatPasswordVisible) {
             repeatPasswordEditText.transformationMethod = PasswordTransformationMethod.getInstance()
-            repeatPasswordVisibilityToggle.setImageResource(R.drawable.ic_visibility_24) //CAMBIAR CON EL DE NO VISIBLE
+            repeatPasswordVisibilityToggle.setImageResource(R.drawable.ic_hidden_24) //CAMBIAR CON EL DE NO VISIBLE
         } else {
             repeatPasswordEditText.transformationMethod = null
             repeatPasswordVisibilityToggle.setImageResource(R.drawable.ic_visibility_24)
