@@ -1,10 +1,12 @@
 package com.example.appcine.ui.filmsInfo
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapShader
 import android.graphics.Canvas
 import android.graphics.Paint
+import android.graphics.Rect
 import android.graphics.Shader
 import android.graphics.Typeface
 import android.graphics.drawable.BitmapDrawable
@@ -14,8 +16,10 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
 import android.view.Gravity
+import android.view.MotionEvent
 import android.view.View
 import android.widget.Button
+import android.widget.FrameLayout
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.LinearLayout
@@ -26,6 +30,7 @@ import com.example.appcine.R
 import com.squareup.picasso.Picasso
 
 class FilmsInformation : AppCompatActivity() {
+    @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_films_infomation)
@@ -46,6 +51,11 @@ class FilmsInformation : AppCompatActivity() {
         val layoutCast: LinearLayout = findViewById(R.id.layoutCast)
         val layoutCrew: LinearLayout = findViewById(R.id.layoutCrew)
         val layoutGeneros: LinearLayout = findViewById(R.id.layoutGeneros)
+        layoutGeneros.visibility = View.GONE
+
+        val mainContainer: FrameLayout = findViewById(R.id.mainContainer)
+        val addIcon: ImageView = findViewById(R.id.addIcon)
+        val layoutDepliegue: LinearLayout = findViewById(R.id.layoutDepliegue)
 
         backButton.setOnClickListener {
             onBackPressed()
@@ -76,6 +86,9 @@ class FilmsInformation : AppCompatActivity() {
             runOnUiThread {
                 val movieTitle: TextView = findViewById(R.id.movieTitle)
                 movieTitle.text = "$title"
+
+                val movieName: TextView = findViewById(R.id.movieName)
+                movieName.text = title
             }
         }
 
@@ -141,12 +154,14 @@ class FilmsInformation : AppCompatActivity() {
         }
 
         trailerView.setOnClickListener {
-            MovieApi.getOfficialTrailer(movieId, apiKey) { trailerKey ->
-                runOnUiThread {
-                    trailerKey?.let { key ->
-                        // Abrir el trailer en YouTube
-                        val intent = Intent(Intent.ACTION_VIEW, Uri.parse("http://www.youtube.com/watch?v=$key"))
-                        startActivity(intent)
+            if (layoutDepliegue.visibility != View.VISIBLE) { // Verifica si layoutDepliegue está visible
+                MovieApi.getOfficialTrailer(movieId, apiKey) { trailerKey ->
+                    runOnUiThread {
+                        trailerKey?.let { key ->
+                            // Abrir el trailer en YouTube solo si layoutDepliegue no está visible
+                            val intent = Intent(Intent.ACTION_VIEW, Uri.parse("http://www.youtube.com/watch?v=$key"))
+                            startActivity(intent)
+                        }
                     }
                 }
             }
@@ -358,5 +373,28 @@ class FilmsInformation : AppCompatActivity() {
                 }
             }
         }
+
+        mainContainer.setOnTouchListener { _, event ->
+            // Oculta layoutDepliegue cuando se toca fuera de él
+            if (layoutDepliegue.visibility == View.VISIBLE && event.action == MotionEvent.ACTION_DOWN) {
+                val outRect = Rect()
+                layoutDepliegue.getGlobalVisibleRect(outRect)
+                if (!outRect.contains(event.rawX.toInt(), event.rawY.toInt())) {
+                    layoutDepliegue.visibility = View.GONE
+                    return@setOnTouchListener true
+                }
+            }
+            false
+        }
+
+        addIcon.setOnClickListener {
+            // Alternar la visibilidad de layoutDepliegue
+            layoutDepliegue.visibility = if (layoutDepliegue.visibility == View.VISIBLE) {
+                View.GONE
+            } else {
+                View.VISIBLE
+            }
+        }
     }
+
 }

@@ -1,420 +1,457 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mainContainer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
     android:fillViewport="true"
     tools:context=".ui.filmsInfo.FilmsInformation">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
-        <!-- Contenedor para el póster de la película -->
-        <ImageView
-            android:id="@+id/movieBackdrop"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:scaleType="centerCrop"
-            android:background="@drawable/rectangle_background"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            />
+            android:layout_height="wrap_content">
 
-        <!-- Icono de flecha con fondo blanco en forma circular -->
-        <ImageButton
-            android:id="@+id/backButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            android:background="@drawable/circular_background"
-            android:src="@drawable/ic_arrow_back_24"
-            app:layout_constraintStart_toStartOf="@+id/movieBackdrop"
-            app:layout_constraintTop_toTopOf="@+id/movieBackdrop"
-            />
+            <!-- Contenedor para el póster de la película -->
+            <ImageView
+                android:id="@+id/movieBackdrop"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:scaleType="centerCrop"
+                android:background="@drawable/rectangle_background"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                />
 
-        <!-- Título de la película -->
-        <TextView
-            android:id="@+id/movieTitle"
-            android:layout_width="240dp"
-            android:layout_height="wrap_content"
-            android:textSize="20sp"
-            android:textColor="@color/black"
-            android:textStyle="bold"
-            android:layout_marginTop="20dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            app:layout_constraintTop_toBottomOf="@+id/movieBackdrop"
-            app:layout_constraintStart_toStartOf="@+id/movieBackdrop"
-            android:text="@string/titulo"/>
-
-        <!-- Título Original -->
-        <TextView
-            android:id="@+id/originalTitle"
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            android:textSize="16sp"
-            android:textColor="@color/black"
-            android:textStyle="italic"
-            android:layout_marginTop="8dp"
-            android:layout_marginStart="16dp"
-            app:layout_constraintTop_toBottomOf="@id/movieTitle"
-            app:layout_constraintStart_toStartOf="@+id/movieBackdrop"
-            android:text="@string/original_title"/>
-
-        <!-- "DIRECTED BY" -->
-        <TextView
-            android:id="@+id/directedBy"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="16sp"
-            android:textColor="@color/black"
-            android:textStyle="bold"
-            android:layout_marginTop="25dp"
-            android:layout_marginStart="16dp"
-            app:layout_constraintTop_toBottomOf="@+id/originalTitle"
-            app:layout_constraintStart_toStartOf="@+id/movieBackdrop"
-            android:text="@string/directed_by"/>
-
-        <!-- Director -->
-        <TextView
-            android:id="@+id/directorName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="16sp"
-            android:textColor="@color/black"
-            android:layout_marginTop="5dp"
-            android:layout_marginStart="16dp"
-            app:layout_constraintTop_toBottomOf="@+id/directedBy"
-            app:layout_constraintStart_toStartOf="@+id/movieBackdrop"
-            android:text="@string/director_name"/>
-
-        <LinearLayout
-            android:id="@+id/infoAnoDuraccion"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="25dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            app:layout_constraintTop_toBottomOf="@+id/directorName"
-            app:layout_constraintStart_toStartOf="@+id/movieBackdrop"
-            app:layout_constraintEnd_toStartOf="@+id/moviePoster">
-
-            <!-- Año de lanzamiento -->
-            <TextView
-                android:id="@+id/releaseYear"
+            <!-- Icono de flecha con fondo blanco en forma circular -->
+            <ImageButton
+                android:id="@+id/backButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="10dp"
-                android:text="@string/year"
-                android:textSize="16sp"
-                android:textColor="@color/black" />
+                android:layout_margin="16dp"
+                android:background="@drawable/circular_background"
+                android:src="@drawable/ic_arrow_back_24"
+                app:layout_constraintStart_toStartOf="@+id/movieBackdrop"
+                app:layout_constraintTop_toTopOf="@+id/movieBackdrop"
+                />
 
-            <!-- Duración de la película -->
+            <!-- Título de la película -->
             <TextView
-                android:id="@+id/movieDuration"
-                android:layout_width="wrap_content"
+                android:id="@+id/movieTitle"
+                android:layout_width="240dp"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintTop_toBottomOf="@+id/movieBackdrop"
+                app:layout_constraintStart_toStartOf="@+id/movieBackdrop"
+                android:text="@string/titulo"/>
+
+            <!-- Título Original -->
+            <TextView
+                android:id="@+id/originalTitle"
+                android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:textSize="16sp"
                 android:textColor="@color/black"
-                android:layout_marginEnd="35dp"
-                android:text="@string/duracion"/>
+                android:textStyle="italic"
+                android:layout_marginTop="8dp"
+                android:layout_marginStart="16dp"
+                app:layout_constraintTop_toBottomOf="@id/movieTitle"
+                app:layout_constraintStart_toStartOf="@+id/movieBackdrop"
+                android:text="@string/original_title"/>
 
-            <!-- Texto "Trailer" -->
+            <!-- "DIRECTED BY" -->
             <TextView
-                android:id="@+id/trailer"
-                android:layout_width="0dp"
+                android:id="@+id/directedBy"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:textSize="16sp"
                 android:textColor="@color/black"
                 android:textStyle="bold"
-                android:text="@string/trailer"/>
-        </LinearLayout>
+                android:layout_marginTop="25dp"
+                android:layout_marginStart="16dp"
+                app:layout_constraintTop_toBottomOf="@+id/originalTitle"
+                app:layout_constraintStart_toStartOf="@+id/movieBackdrop"
+                android:text="@string/directed_by"/>
 
-        <!-- Poster -->
-        <ImageView
-            android:id="@+id/moviePoster"
-            android:layout_width="130dp"
-            android:layout_height="180dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="10dp"
-            android:background="@drawable/rectangle_poster"
-            app:layout_constraintTop_toBottomOf="@+id/movieBackdrop"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintDimensionRatio="H,3:4"
-            tools:layout_editor_absoluteX="245dp"
-            tools:ignore="MissingConstraints" />
+            <!-- Director -->
+            <TextView
+                android:id="@+id/directorName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:layout_marginTop="5dp"
+                android:layout_marginStart="16dp"
+                app:layout_constraintTop_toBottomOf="@+id/directedBy"
+                app:layout_constraintStart_toStartOf="@+id/movieBackdrop"
+                android:text="@string/director_name"/>
 
-        <!-- Tagline -->
-        <TextView
-            android:id="@+id/tagline"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="15sp"
-            android:textColor="@color/black"
-            android:layout_marginTop="25dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            app:layout_constraintTop_toBottomOf="@+id/infoAnoDuraccion"
-            app:layout_constraintStart_toStartOf="@+id/movieBackdrop"
-            android:text="@string/tagline"/>
+            <LinearLayout
+                android:id="@+id/infoAnoDuraccion"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="25dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintTop_toBottomOf="@+id/directorName"
+                app:layout_constraintStart_toStartOf="@+id/movieBackdrop"
+                app:layout_constraintEnd_toStartOf="@+id/moviePoster">
 
-        <!-- Overview -->
-        <TextView
-            android:id="@+id/overview"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:textSize="14sp"
-            android:textColor="@color/black"
-            android:layout_marginTop="10dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            app:layout_constraintTop_toBottomOf="@id/tagline"
-            app:layout_constraintStart_toStartOf="@+id/movieBackdrop"
-            app:layout_constraintEnd_toEndOf="@+id/movieBackdrop"
-            android:maxLines="3"
-            android:ellipsize="end"
-            android:text="@string/overview"
-            android:clickable="true"
-            android:focusable="true"
-            android:onClick="onOverviewClicked" />
+                <!-- Año de lanzamiento -->
+                <TextView
+                    android:id="@+id/releaseYear"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:text="@string/year"
+                    android:textSize="16sp"
+                    android:textColor="@color/black" />
 
-        <View
-            android:id="@+id/linea1"
-            android:layout_width="0dp"
-            android:layout_height="1dp"
-            android:background="@android:color/black"
-            android:layout_marginTop="13dp"
-            app:layout_constraintTop_toBottomOf="@id/overview"
-            app:layout_constraintStart_toStartOf="@id/overview"
-            app:layout_constraintEnd_toEndOf="@id/overview"
-            app:layout_constraintWidth_percent="0.95" />
+                <!-- Duración de la película -->
+                <TextView
+                    android:id="@+id/movieDuration"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:textColor="@color/black"
+                    android:layout_marginEnd="35dp"
+                    android:text="@string/duracion"/>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginTop="5dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            app:layout_constraintTop_toBottomOf="@id/linea1"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent">
+                <!-- Texto "Trailer" -->
+                <TextView
+                    android:id="@+id/trailer"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textSize="16sp"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:text="@string/trailer"/>
+            </LinearLayout>
 
-            <!-- Menú horizontal -->
-            <HorizontalScrollView
-                android:id="@+id/menu_horizontal"
+            <!-- Poster -->
+            <ImageView
+                android:id="@+id/moviePoster"
+                android:layout_width="130dp"
+                android:layout_height="180dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:background="@drawable/rectangle_poster"
+                app:layout_constraintTop_toBottomOf="@+id/movieBackdrop"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintDimensionRatio="H,3:4"
+                tools:layout_editor_absoluteX="245dp"
+                tools:ignore="MissingConstraints" />
+
+            <!-- Tagline -->
+            <TextView
+                android:id="@+id/tagline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="15sp"
+                android:textColor="@color/black"
+                android:layout_marginTop="25dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintTop_toBottomOf="@+id/infoAnoDuraccion"
+                app:layout_constraintStart_toStartOf="@+id/movieBackdrop"
+                android:text="@string/tagline"/>
+
+            <!-- Overview -->
+            <TextView
+                android:id="@+id/overview"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:textColor="@color/black"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintTop_toBottomOf="@id/tagline"
+                app:layout_constraintStart_toStartOf="@+id/movieBackdrop"
+                app:layout_constraintEnd_toEndOf="@+id/movieBackdrop"
+                android:maxLines="3"
+                android:ellipsize="end"
+                android:text="@string/overview"
+                android:clickable="true"
+                android:focusable="true"
+                android:onClick="onOverviewClicked" />
+
+            <View
+                android:id="@+id/linea1"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:background="@android:color/black"
+                android:layout_marginTop="13dp"
+                app:layout_constraintTop_toBottomOf="@id/overview"
+                app:layout_constraintStart_toStartOf="@id/overview"
+                app:layout_constraintEnd_toEndOf="@id/overview"
+                app:layout_constraintWidth_percent="0.95" />
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="5dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintTop_toBottomOf="@id/linea1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
+
+                <!-- Menú horizontal -->
+                <HorizontalScrollView
+                    android:id="@+id/menu_horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <!-- Opción "Cast + Crew" -->
+                        <Button
+                            android:id="@+id/buttonCastCrew"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/cast_crew"
+                            android:textColor="@color/black"
+                            android:onClick="showCastCrewSection"
+                            android:background="@android:color/transparent" />
+
+                        <!-- Línea debajo del botón -->
+                        <View
+                            android:id="@+id/linea_selected_cast"
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="#264058"
+                            android:layout_marginTop="5dp"
+                            android:visibility="visible"
+                            app:layout_constraintTop_toBottomOf="@id/buttonCastCrew"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent" />
+
+                        <!-- Opción "Genre" -->
+                        <Button
+                            android:id="@+id/buttonGenre"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/genre"
+                            android:textColor="@android:color/black"
+                            android:onClick="showGenreSection"
+                            android:background="@android:color/transparent" />
+
+                        <!-- Línea debajo de "Genre" -->
+                        <View
+                            android:id="@+id/linea_selected_genre"
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="#264058"
+                            android:layout_marginTop="5dp"
+                            android:visibility="gone"
+                            app:layout_constraintTop_toBottomOf="@id/buttonGenre"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent" />
+
+                    </LinearLayout>
+                </HorizontalScrollView>
+
+                <!-- Subapartado "Cast" -->
+                <LinearLayout
+                    android:id="@+id/layoutCast"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    app:layout_constraintTop_toBottomOf="@id/linea1"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent">
+
+                    <TextView
+                        android:id="@+id/textCast"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/cast"
+                        android:textColor="@color/black"
+                        android:textSize="15sp"
+                        android:layout_marginBottom="5dp"/>
+
+                    <!-- Scroll lateral para el elenco -->
+                    <HorizontalScrollView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <LinearLayout
+                            android:id="@+id/castLayout"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:id="@+id/circlePhotoCast"
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                android:src="@drawable/circular_photo"
+                                android:layout_gravity="center_horizontal" />
+
+                            <TextView
+                                android:id="@+id/nameCast"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"
+                                android:text="@string/nombre"
+                                android:textSize="14sp"
+                                android:textColor="@color/black"
+                                android:layout_marginTop="5dp"/>
+
+                            <TextView
+                                android:id="@+id/character"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"
+                                android:text="@string/character"
+                                android:textSize="13sp"
+                                android:textColor="@color/black"
+                                android:layout_marginTop="5dp"/>
+
+                        </LinearLayout>
+                    </HorizontalScrollView>
+                </LinearLayout>
+
+                <!-- Subapartado "Crew" -->
+                <LinearLayout
+                    android:id="@+id/layoutCrew"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    app:layout_constraintTop_toBottomOf="@id/linea1"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent">
+
+                    <TextView
+                        android:id="@+id/textCrew"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/crew"
+                        android:textColor="@color/black"
+                        android:textSize="15sp"
+                        android:layout_marginBottom="5dp"/>
+
+                    <!-- Scroll lateral para el elenco -->
+                    <HorizontalScrollView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <LinearLayout
+                            android:id="@+id/crewLayout"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:id="@+id/circlePhotoCrew"
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                android:src="@drawable/circular_photo"
+                                android:layout_gravity="center_horizontal" />
+
+                            <TextView
+                                android:id="@+id/nameCrew"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"
+                                android:text="@string/nombre"
+                                android:textSize="14sp"
+                                android:textColor="@color/black"
+                                android:layout_marginTop="5dp"/>
+
+                            <TextView
+                                android:id="@+id/jobCrew"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"
+                                android:text="@string/job"
+                                android:textSize="13sp"
+                                android:textColor="@color/black"
+                                android:layout_marginTop="5dp"/>
+
+                        </LinearLayout>
+                    </HorizontalScrollView>
+                </LinearLayout>
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:id="@+id/layoutGeneros"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:orientation="vertical"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    app:layout_constraintTop_toBottomOf="@id/layoutCast"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent">
 
-                    <!-- Opción "Cast + Crew" -->
-                    <Button
-                        android:id="@+id/buttonCastCrew"
+                    <!-- Géneros de la película -->
+                    <TextView
+                        android:id="@+id/generos"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/cast_crew"
                         android:textColor="@color/black"
-                        android:onClick="showCastCrewSection"
-                        android:background="@android:color/transparent" />
-
-                    <!-- Línea debajo del botón -->
-                    <View
-                        android:id="@+id/linea_selected_cast"
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="#264058"
-                        android:layout_marginTop="5dp"
-                        android:visibility="visible"
-                        app:layout_constraintTop_toBottomOf="@id/buttonCastCrew"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent" />
-
-                    <!-- Opción "Genre" -->
-                    <Button
-                        android:id="@+id/buttonGenre"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/genre"
-                        android:textColor="@android:color/black"
-                        android:onClick="showGenreSection"
-                        android:background="@android:color/transparent" />
-
-                    <!-- Línea debajo de "Genre" -->
-                    <View
-                        android:id="@+id/linea_selected_genre"
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="#264058"
-                        android:layout_marginTop="5dp"
-                        android:visibility="gone"
-                        app:layout_constraintTop_toBottomOf="@id/buttonGenre"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent" />
-
+                        android:textSize="14sp"
+                        android:text="@string/generos_pelicula"/>
                 </LinearLayout>
-            </HorizontalScrollView>
 
-            <!-- Subapartado "Cast" -->
-            <LinearLayout
-                android:id="@+id/layoutCast"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginTop="5dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"
-                app:layout_constraintTop_toBottomOf="@id/linea1"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent">
-
-                <TextView
-                    android:id="@+id/textCast"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/cast"
-                    android:textColor="@color/black"
-                    android:textSize="15sp"
-                    android:layout_marginBottom="5dp"/>
-
-                <!-- Scroll lateral para el elenco -->
-                <HorizontalScrollView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <LinearLayout
-                        android:id="@+id/castLayout"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <ImageView
-                            android:id="@+id/circlePhotoCast"
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:src="@drawable/circular_photo"
-                            android:layout_gravity="center_horizontal" />
-
-                        <TextView
-                            android:id="@+id/nameCast"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_horizontal"
-                            android:text="@string/nombre"
-                            android:textSize="14sp"
-                            android:textColor="@color/black"
-                            android:layout_marginTop="5dp"/>
-
-                        <TextView
-                            android:id="@+id/character"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_horizontal"
-                            android:text="@string/character"
-                            android:textSize="13sp"
-                            android:textColor="@color/black"
-                            android:layout_marginTop="5dp"/>
-
-                    </LinearLayout>
-                </HorizontalScrollView>
             </LinearLayout>
 
-            <!-- Subapartado "Crew" -->
-            <LinearLayout
-                android:id="@+id/layoutCrew"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginTop="5dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"
-                app:layout_constraintTop_toBottomOf="@id/linea1"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent">
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 
-                <TextView
-                    android:id="@+id/textCrew"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/crew"
-                    android:textColor="@color/black"
-                    android:textSize="15sp"
-                    android:layout_marginBottom="5dp"/>
+    <LinearLayout
+        android:id="@+id/layoutDepliegue"
+        android:layout_width="match_parent"
+        android:layout_height="470dp"
+        android:background="@color/ash_gray"
+        android:layout_gravity="bottom|center_horizontal"
+        android:elevation="8dp"
+        android:visibility="gone">
 
-                <!-- Scroll lateral para el elenco -->
-                <HorizontalScrollView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/movieName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:gravity="center"
+            android:padding="16dp"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
 
-                    <LinearLayout
-                        android:id="@+id/crewLayout"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
+    </LinearLayout>
 
-                        <ImageView
-                            android:id="@+id/circlePhotoCrew"
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:src="@drawable/circular_photo"
-                            android:layout_gravity="center_horizontal" />
+    <ImageView
+        android:id="@+id/addIcon"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="16dp"
+        android:elevation="33dp"
+        android:src="@drawable/ic_add_circle_24" />
 
-                        <TextView
-                            android:id="@+id/nameCrew"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_horizontal"
-                            android:text="@string/nombre"
-                            android:textSize="14sp"
-                            android:textColor="@color/black"
-                            android:layout_marginTop="5dp"/>
-
-                        <TextView
-                            android:id="@+id/jobCrew"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_horizontal"
-                            android:text="@string/job"
-                            android:textSize="13sp"
-                            android:textColor="@color/black"
-                            android:layout_marginTop="5dp"/>
-
-                    </LinearLayout>
-                </HorizontalScrollView>
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/layoutGeneros"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginTop="5dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"
-                app:layout_constraintTop_toBottomOf="@id/layoutCast"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent">
-
-                <!-- Géneros de la película -->
-                <TextView
-                    android:id="@+id/generos"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/black"
-                    android:textSize="14sp"
-                    android:text="@string/generos_pelicula"/>
-            </LinearLayout>
-
-        </LinearLayout>
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</ScrollView>
+</FrameLayout>
