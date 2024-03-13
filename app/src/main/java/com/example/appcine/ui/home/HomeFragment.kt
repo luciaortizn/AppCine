@@ -8,6 +8,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
+import androidx.cardview.widget.CardView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
@@ -73,14 +75,22 @@ class HomeFragment : Fragment() {
         filmList = arrayListOf<Films>()
         getData()
 
+
+
     }
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
     private fun getData() {
+
         fetchMovies()
-        recyclerView.adapter = HomeAdapter(filmList)
+
+        val homeAdapter = HomeAdapter(filmList)
+
+        recyclerView.adapter = homeAdapter
+
+
     }
 
     private fun fetchMovies() {
@@ -107,11 +117,13 @@ class HomeFragment : Fragment() {
                         val jsonObject = JSONObject(it)
                         val results = jsonObject.getJSONArray("results")
 
-                        // Process movie data
-                        activity?.runOnUiThread {
-                            // Update UI with movie data
-                            processMovies(results)
-                        }
+                            // Process movie data
+                            activity?.runOnUiThread {
+                                // Update UI with movie data
+                                processMovies(results)
+                            }
+
+
                     }
                 }
             }
@@ -134,17 +146,25 @@ class HomeFragment : Fragment() {
 
             // Cargar el póster usando la biblioteca Picasso
             Picasso.get().load("https://image.tmdb.org/t/p/w500$posterPath").into(imageView)
-
-            imageView.setOnClickListener{
-                val intent = Intent(activity, FilmsInformation::class.java)
-                intent.putExtra("movieID", movieId)
-                startActivity(intent)
-            }*/
-
+                **/
             filmList.add(Films(posterPath, movieId))
+
         }
 
+        val homeAdapter:HomeAdapter = HomeAdapter(filmList)
+
+        homeAdapter.setOnClickListener(object : HomeAdapter.OnClickListener {
+            override fun onClick(position: Int, model: Films) {
+                Toast.makeText(context, "Clic en la película", Toast.LENGTH_SHORT).show()
+                val intent = Intent(context, FilmsInformation::class.java)
+                intent.putExtra("movieID", model.idPelicula)
+                startActivity(intent)
+            }
+        })
+
+        recyclerView.adapter = homeAdapter
         recyclerView.adapter?.notifyDataSetChanged()
 
     }
+
 }

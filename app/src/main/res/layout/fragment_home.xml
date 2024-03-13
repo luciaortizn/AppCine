@@ -68,7 +68,8 @@ app:layout_constraintEnd_toStartOf="@id/recycler_view">
         android:orientation="horizontal"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         app:spanCount="2"
-        android:layoutDirection="ltr">
+        android:layoutDirection="ltr"
+        android:layout_marginBottom="60dp">
     </androidx.recyclerview.widget.RecyclerView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
