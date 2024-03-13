@@ -74,8 +74,8 @@ class HomeFragment : Fragment() {
         recyclerView.setHasFixedSize(true)
 
         filmList = arrayListOf<Films>()
+        //vista predeterminada de las películas destacadas
         getData()
-
 
         //searchview
         val sv : SearchView = view.findViewById(R.id.search_view)
@@ -85,14 +85,31 @@ class HomeFragment : Fragment() {
                 // Este método se llama cuando se presiona "Enter" en el teclado
                 if (query != null) {
                     Toast.makeText(context, query, Toast.LENGTH_SHORT).show()
-                    // Aquí puedes realizar acciones adicionales con el texto de búsqueda
+                    // filtro la búsqueda
+                    filmList.clear()
+                    //vista filtrada
+                    fetchSearchedFilms(query)
+                    val homeAdapter = HomeAdapter(filmList)
+                    homeAdapter.setOnClickListener(object : HomeAdapter.OnClickListener {
+                        override fun onClick(position: Int, model: Films) {
+                            Toast.makeText(context, model.dataImage.toString(), Toast.LENGTH_SHORT).show()
+                            val intent = Intent(context, FilmsInformation::class.java)
+                            intent.putExtra("movieID", model.idPelicula)
+                            startActivity(intent)
+                        }
+                    })
+
+                    recyclerView.adapter = homeAdapter
                 }
                 return true
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
-                // Este método se llama cuando el texto de búsqueda cambia
-                // Puedes realizar acciones adicionales si lo necesitas
+                if (newText.isNullOrBlank()) {
+                    filmList.clear()
+                    //vuelta a vista destacada
+                    getData()
+                }
                 return true
             }
         })
@@ -107,7 +124,7 @@ class HomeFragment : Fragment() {
         val homeAdapter = HomeAdapter(filmList)
         homeAdapter.setOnClickListener(object : HomeAdapter.OnClickListener {
             override fun onClick(position: Int, model: Films) {
-                Toast.makeText(context, "Clic en la película", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, model.dataImage.toString(), Toast.LENGTH_SHORT).show()
                 val intent = Intent(context, FilmsInformation::class.java)
                 intent.putExtra("movieID", model.idPelicula)
                 startActivity(intent)
@@ -158,10 +175,10 @@ class HomeFragment : Fragment() {
     //obtiene las películas buscadas
     private fun getSearchedString():String {
         val searchView = view?.findViewById<SearchView>(R.id.search_view)
-        if (searchView != null) {
-            return searchView.query.toString()
+        return if (searchView != null) {
+            searchView.query.toString()
         }else {
-            return "No se han encontrado resultados"
+            "No se han encontrado resultados"
         }
     }
 
@@ -211,7 +228,7 @@ class HomeFragment : Fragment() {
         // Iterar a través de los primeros 10 resultados de películas
         for (i in 0 until moviesToShow) {
             val movieObject = results.getJSONObject(i)
-            val posterPath = movieObject.getString("poster_path")
+            var posterPath = movieObject.getString("poster_path")
             val movieId = movieObject.getInt("id")
 
             /*// Actualizar UI con el póster de la película
@@ -220,7 +237,9 @@ class HomeFragment : Fragment() {
             // Cargar el póster usando la biblioteca Picasso
             Picasso.get().load("https://image.tmdb.org/t/p/w500$posterPath").into(imageView)
                 **/
-
+            if(posterPath.isEmpty()|| posterPath.length<5){
+               posterPath = "https://lightwidget.com/wp-content/uploads/localhost-file-not-found.jpg";
+            }
             filmList.add(Films(posterPath, movieId))
 
         }
