@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.appcine.R
@@ -19,8 +20,6 @@ class FavoritesFragment : Fragment() {
     private lateinit var  recyclerView: RecyclerView
     private lateinit var favoritesList:ArrayList<Films>
     lateinit var imageList:Array<Int>
-    lateinit var titleList:Array<String>
-    lateinit var favoriteIconList:Array<Int>
     private var _binding: FragmentFavoritesBinding? = null
 
     // This property is only valid between onCreateView and
@@ -50,16 +49,11 @@ class FavoritesFragment : Fragment() {
         imageList = arrayOf(
             R.drawable.ic_add_a_photo_24,
         )
-        titleList = arrayOf(
-            "Wonka"
-
-        )
-        favoriteIconList = arrayOf(
-            R.drawable.baseline_favorite_24,
-        )
-
-        recyclerView = view.findViewById(R.id.recycler_view_favorites)
-        recyclerView.layoutManager = LinearLayoutManager(context)
+        val numColumnas = 2
+        // GridLayoutManager con 2 columnas
+        val layoutManager = GridLayoutManager(context, numColumnas)
+        // Establezco el layoutManager en el RecyclerView
+        recyclerView.layoutManager = layoutManager
         recyclerView.setHasFixedSize(true)
 
         favoritesList = arrayListOf<Films>()
@@ -71,11 +65,8 @@ class FavoritesFragment : Fragment() {
     }
     private fun getData() {
         for (i in imageList.indices){
-            val film= Films(imageList[i], titleList[i], favoriteIconList[i] )
-            //filtra por icono pero debería filtrar también por usuario
-            if(film.favoritesImage == R.drawable.baseline_favorite_24) {
-                favoritesList.add(film)
-            }
+            val film= Films(imageList[i])
+            favoritesList.add(film)
         }
         recyclerView.adapter = HomeAdapter(favoritesList)
     }

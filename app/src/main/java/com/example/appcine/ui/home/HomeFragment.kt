@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.appcine.R
@@ -23,8 +24,6 @@ class HomeFragment : Fragment() {
     private lateinit var  recyclerView: RecyclerView
     private lateinit var filmList:ArrayList<Films>
     lateinit var imageList:Array<Int>
-    lateinit var titleList:Array<String>
-    lateinit var favoriteIconList:Array<Int>
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -55,22 +54,13 @@ class HomeFragment : Fragment() {
             R.drawable.ic_add_a_photo_24
 
         )
-        titleList = arrayOf(
-            "Wonka",
-            "Titanic",
-            "Poor Things",
-            "Oppenheimer",
-            "El mago de Oz"
-        )
-        favoriteIconList = arrayOf(
-            R.drawable.outline_favorite_border_24,
-            R.drawable.outline_favorite_border_24,
-            R.drawable.outline_favorite_border_24,
-            R.drawable.outline_favorite_border_24,
-            R.drawable.outline_favorite_border_24
-        )
+
         recyclerView = view.findViewById(R.id.recycler_view)
-        recyclerView.layoutManager = LinearLayoutManager(context)
+        val numColumnas = 2
+        // GridLayoutManager con 2 columnas
+        val layoutManager = GridLayoutManager(context, numColumnas)
+        // Establezco el layoutManager en el RecyclerView
+        recyclerView.layoutManager = layoutManager
         recyclerView.setHasFixedSize(true)
 
         filmList = arrayListOf<Films>()
@@ -84,7 +74,7 @@ class HomeFragment : Fragment() {
     }
     private fun getData() {
         for (i in imageList.indices){
-            val film= Films(imageList[i], titleList[i], favoriteIconList[i] )
+            val film= Films(imageList[i] )
             filmList.add(film)
 
 

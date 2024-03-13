@@ -15,8 +15,8 @@
        android:layout_height="wrap_content" >
        <ImageView
            android:id="@+id/imgFilm"
-           android:layout_width="150dp"
-           android:layout_height="200dp"
+           android:layout_width="160dp"
+           android:layout_height="220dp"
            android:clickable="true"
            android:adjustViewBounds="true"
            android:scaleType="fitXY"
@@ -24,41 +24,5 @@
            android:contentDescription="@string/item_que_representa_una_pel_cula"
            android:focusable="true">
        </ImageView>
-       <LinearLayout
-           android:paddingStart="10dp"
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:orientation="horizontal">
-
-           <TextView
-               android:id="@+id/titleFilm"
-               android:layout_width="match_parent"
-               android:layout_gravity="center"
-               android:layout_height="wrap_content"
-               android:textColor="@color/black"
-               android:textSize="14sp"
-               android:text="Title"
-               android:paddingEnd="10dp"
-               android:paddingStart="10dp"
-               >
-           </TextView>
-           <ImageView
-               android:id="@+id/favoritesFilm"
-               android:layout_width="48dp"
-               android:paddingStart="0dp"
-               android:layout_height="48dp"
-               android:clickable="true"
-               android:layout_gravity="end|center"
-               android:adjustViewBounds="true"
-               android:scaleType="fitXY"
-               android:src="@drawable/outline_favorite_border_24"
-               android:contentDescription="@string/item_que_representa_una_pel_cula"
-               android:focusable="true">
-           </ImageView>
-
-
-       </LinearLayout>
-
-
    </LinearLayout>
 </androidx.cardview.widget.CardView>

@@ -17,8 +17,6 @@ class HomeAdapter (private val dataList:ArrayList<Films>):RecyclerView.Adapter<H
     override fun onBindViewHolder(holder: HomeAdapter.ViewHolderClass, position: Int) {
         val currentItem = dataList[position]
         holder.rvImage.setImageResource(currentItem.dataImage)
-        holder.rvTitle.text = currentItem.dataTitle
-        holder.rvFavoritesIcon.setImageResource(currentItem.favoritesImage)
         //aquí gestionamos el click
     }
 
@@ -29,8 +27,5 @@ class HomeAdapter (private val dataList:ArrayList<Films>):RecyclerView.Adapter<H
     //hay otra clase viewHolder hay que juntarlas
     class ViewHolderClass(itemView: View):RecyclerView.ViewHolder(itemView){
         val rvImage: ImageView = itemView.findViewById(R.id.imgFilm)
-        val rvTitle: TextView = itemView.findViewById(R.id.titleFilm)
-        val rvFavoritesIcon : ImageView = itemView.findViewById(R.id.favoritesFilm)
-
     }
 }
