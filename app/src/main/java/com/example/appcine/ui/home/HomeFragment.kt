@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.SearchView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.cardview.widget.CardView
@@ -76,7 +77,25 @@ class HomeFragment : Fragment() {
         getData()
 
 
+        //searchview
+        val sv : SearchView = view.findViewById(R.id.search_view)
 
+        sv.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                // Este método se llama cuando se presiona "Enter" en el teclado
+                if (query != null) {
+                    Toast.makeText(context, query, Toast.LENGTH_SHORT).show()
+                    // Aquí puedes realizar acciones adicionales con el texto de búsqueda
+                }
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                // Este método se llama cuando el texto de búsqueda cambia
+                // Puedes realizar acciones adicionales si lo necesitas
+                return true
+            }
+        })
     }
     override fun onDestroyView() {
         super.onDestroyView()
@@ -85,15 +104,23 @@ class HomeFragment : Fragment() {
     private fun getData() {
 
         fetchMovies()
-
         val homeAdapter = HomeAdapter(filmList)
+        homeAdapter.setOnClickListener(object : HomeAdapter.OnClickListener {
+            override fun onClick(position: Int, model: Films) {
+                Toast.makeText(context, "Clic en la película", Toast.LENGTH_SHORT).show()
+                val intent = Intent(context, FilmsInformation::class.java)
+                intent.putExtra("movieID", model.idPelicula)
+                startActivity(intent)
+            }
+        })
 
         recyclerView.adapter = homeAdapter
 
-
     }
 
+    //se obtiene el request de la api y obtiene los objetos JSON
     private fun fetchMovies() {
+
         val request = Request.Builder()
             .url("https://api.themoviedb.org/3/discover/movie?include_video=true&page=1&sort_by=popularity.desc")
             .get()
@@ -117,9 +144,8 @@ class HomeFragment : Fragment() {
                         val jsonObject = JSONObject(it)
                         val results = jsonObject.getJSONArray("results")
 
-                            // Process movie data
                             activity?.runOnUiThread {
-                                // Update UI with movie data
+                                // se actualiza la interfaz de info
                                 processMovies(results)
                             }
 
@@ -129,6 +155,53 @@ class HomeFragment : Fragment() {
             }
         })
     }
+    //obtiene las películas buscadas
+    private fun getSearchedString():String {
+        val searchView = view?.findViewById<SearchView>(R.id.search_view)
+        if (searchView != null) {
+            return searchView.query.toString()
+        }else {
+            return "No se han encontrado resultados"
+        }
+    }
+
+     private fun fetchSearchedFilms(query:String){
+        val client = OkHttpClient()
+        val request = Request.Builder()
+            .url("https://api.themoviedb.org/3/search/movie?query=$query")
+            .get()
+            .addHeader("accept", "application/json")
+            .addHeader("Authorization", "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzYzM2MDY4YjUxOTQ4MTJmODM2N2RhMWQxZmY3YjNmNyIsInN1YiI6IjY1YTBmOTkyNDQ3ZjljMDEyMjVhNjE1NiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ._Y48hLg92ILHsg8MsWJR6p01JUIRrRpF_m6bgI66pbo")
+            .build()
+        client.newCall(request).enqueue(object : Callback {
+            override fun onFailure(call: Call, e: IOException) {
+                // Errores
+                e.printStackTrace()
+            }
+            override fun onResponse(call: Call, response: Response) {
+                response.use {
+                    if (!response.isSuccessful) throw IOException("Unexpected code $response")
+
+                    val responseData = response.body()?.string()
+                    responseData?.let {
+                        // Parse JSON data
+                        val jsonObject = JSONObject(it)
+                        val results = jsonObject.getJSONArray("results")
+
+                        activity?.runOnUiThread {
+                            // se actualiza la interfaz de info
+                            processMovies(results)
+                        }
+
+
+                    }
+                }
+            }
+        })
+
+    }
+
+
 
     @SuppressLint("NotifyDataSetChanged")
     private fun processMovies(results: JSONArray) {
@@ -147,24 +220,11 @@ class HomeFragment : Fragment() {
             // Cargar el póster usando la biblioteca Picasso
             Picasso.get().load("https://image.tmdb.org/t/p/w500$posterPath").into(imageView)
                 **/
+
             filmList.add(Films(posterPath, movieId))
 
         }
-
-        val homeAdapter:HomeAdapter = HomeAdapter(filmList)
-
-        homeAdapter.setOnClickListener(object : HomeAdapter.OnClickListener {
-            override fun onClick(position: Int, model: Films) {
-                Toast.makeText(context, "Clic en la película", Toast.LENGTH_SHORT).show()
-                val intent = Intent(context, FilmsInformation::class.java)
-                intent.putExtra("movieID", model.idPelicula)
-                startActivity(intent)
-            }
-        })
-
-        recyclerView.adapter = homeAdapter
         recyclerView.adapter?.notifyDataSetChanged()
 
     }
-
 }

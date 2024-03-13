@@ -25,10 +25,8 @@ import com.google.firebase.database.ValueEventListener
 class Register : AppCompatActivity() {
 
     private lateinit var binding: ActivityRegisterBinding
-
     private lateinit var firebaseDatabase: FirebaseDatabase
     private lateinit var databaseRerence: DatabaseReference
-
     private lateinit var mAuth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,8 +39,10 @@ class Register : AppCompatActivity() {
         firebaseDatabase = FirebaseDatabase.getInstance()
         databaseRerence = firebaseDatabase.reference.child("users")
 
+        //inicializa firebase
         mAuth = FirebaseAuth.getInstance()
 
+        //intenta registrar al usuario
         binding.btnRegister.setOnClickListener {
 
             val email = binding.editTextEmail.text.toString()
@@ -63,6 +63,7 @@ class Register : AppCompatActivity() {
 
     }
 
+    //realiza la acción de registro
     private fun registerUser(
         email: String,
         username: String,
@@ -74,7 +75,7 @@ class Register : AppCompatActivity() {
 
         if (validationResult == ValidationResult.SUCCESS) {
 
-            //VALIDAMOS QUE EL NOMBRE DE USUARIO NO ESTÉ YA REGISTRADO
+            //validamos que el nombre de usuario no esté registrado
             databaseRerence.orderByChild("username").equalTo(username).addListenerForSingleValueEvent(object : ValueEventListener {
                 override fun onDataChange(dataSnapshot: DataSnapshot) {
                     if (!dataSnapshot.exists()){
@@ -86,7 +87,7 @@ class Register : AppCompatActivity() {
 
                         //Toast.makeText(this@Register, "SingUp Successfull", Toast.LENGTH_SHORT).show()
 
-                        //Change interface
+                        //Cambiar interfaz
                         val intent = Intent(this@Register, Login::class.java)
                         startActivity(intent)
                         overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
@@ -107,6 +108,7 @@ class Register : AppCompatActivity() {
         }
     }
 
+    //validar campos mostrando errores/mensaje de éxito de la clase enumerada
     private fun validateFields(email: String, username: String, firstName: String,  password: String, confirmPassword: String): Any {
         return when {
             isAnyFieldEmpty(email, username, firstName, password, confirmPassword) -> ValidationResult.EMPTY_FIELD
@@ -118,19 +120,24 @@ class Register : AppCompatActivity() {
         }
     }
 
+    //validación espacios entre palabras
     private fun containsWhiteSpace(vararg fields: String): Boolean {
         return fields.any { it.contains(" ") }
     }
 
+    //validación email con patrón EMAIL_ADDRESS  de android.util
     private fun isEmailValid(email: String): Boolean {
+
         val emailPattern = Patterns.EMAIL_ADDRESS
         return emailPattern.matcher(email).matches()
     }
 
+    //campos vacíos
     private fun isAnyFieldEmpty(vararg fields: String): Boolean {
         return fields.any { it.isBlank() }
     }
 
+    //se introduce tipo de dato incorrecto
     private fun containsNumbers(vararg fields: String): Boolean {
         val regex = Regex("\\d")
         return fields.any { field ->
@@ -138,10 +145,12 @@ class Register : AppCompatActivity() {
         }
     }
 
+    //cointraseñas coincidentes
     private fun doPasswordsMatch(password: String, repeatPassword: String): Boolean {
         return password == repeatPassword
     }
 
+    //validación regex de contraseña
     private fun isPasswordStrongEnough(password: String): Boolean {
         val digitRegex = Regex("\\d")
         val upperCaseRegex = Regex("[A-Z]")
@@ -156,6 +165,7 @@ class Register : AppCompatActivity() {
                 !password.contains(" ")
     }
 
+    //muestra las alertas según el resultado de la validación
     private fun showInvalidFieldsAlert(validationResult: Any) {
         val alertDialogBuilder = AlertDialog.Builder(this)
         alertDialogBuilder.setTitle("Invalid Fields")
@@ -176,6 +186,7 @@ class Register : AppCompatActivity() {
         alertDialog.show()
     }
 
+    //muestra error si el usuario ya existe
     private fun showUserExistsAlert() {
         val alertDialogBuilder = AlertDialog.Builder(this)
         alertDialogBuilder.setTitle("User Exists")
@@ -187,6 +198,7 @@ class Register : AppCompatActivity() {
         alertDialog.show()
     }
 
+
     enum class ValidationResult {
         SUCCESS,
         INVALID_EMAIL,
@@ -196,6 +208,7 @@ class Register : AppCompatActivity() {
         WHITESPACE_IN_FIELD
     }
 
+    //cambia la visibiliidad de la contraseña determinada por un icono
     fun passwordVisibility(view: View) {
         val passwordEditText = findViewById<EditText>(R.id.editTextPassword)
         val passwordVisibilityToggle = findViewById<ImageView>(R.id.passwordVisibilityToggle)
@@ -221,6 +234,7 @@ class Register : AppCompatActivity() {
         passwordEditText.setSelection(passwordEditText.text.length)
     }
 
+    //cambia de contraseña a oculto
     fun repeatPasswordVisibility(view: View) {
         val repeatPasswordEditText = findViewById<EditText>(R.id.editTextRepeatPassword)
         val repeatPasswordVisibilityToggle = findViewById<ImageView>(R.id.repeatPasswordVisibilityToggle)

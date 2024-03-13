@@ -19,10 +19,10 @@ class HomeAdapter (private val dataList:ArrayList<Films>):RecyclerView.Adapter<H
     override fun onBindViewHolder(holder: HomeAdapter.ViewHolderClass, position: Int) {
         val currentItem = dataList[position]
 
+        //castea de String a Int para formar la imagen
         Picasso.get().load("https://image.tmdb.org/t/p/w500${currentItem.dataImage}").into(holder.rvImage)
 
-
-        holder.itemView.setOnClickListener{
+        holder.rvImage.setOnClickListener{
 
             if (onClickListener != null){
                 onClickListener!!.onClick(position, currentItem)
@@ -42,7 +42,8 @@ class HomeAdapter (private val dataList:ArrayList<Films>):RecyclerView.Adapter<H
        return dataList.size
     }
 
-    //hay otra clase viewHolder hay que juntarlas
+
+    //obtiene los elementos de la vista
     class ViewHolderClass(itemView: View):RecyclerView.ViewHolder(itemView){
         val rvImage: ImageView = itemView.findViewById(R.id.imgFilm)
     }

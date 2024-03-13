@@ -50,13 +50,17 @@ class Login : AppCompatActivity() {
         }
     }
 
+    /**
+     *
+     *  Autenticación de un usuario comparando credenciales
+     */
     private fun loginUser(username: String, password: String) {
         databaseReference.orderByChild("username").equalTo(username).addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 if (dataSnapshot.exists()) {
                     for (userSnapshot in dataSnapshot.children) {
                         val userData = userSnapshot.getValue(UserData::class.java)
-
+                       // Si las credenciales son válidas, se inicia sesión y se almacenan datos del usuario
                         if (userData != null) {
                             val storedHash = userData.password
                             val enteredHash = PasswordEncrypt.hashPassword(password)
@@ -76,13 +80,15 @@ class Login : AppCompatActivity() {
                             }
                         }
                     }
-                    // Password doesn't match
+                    //no coincide la contraseña se muestra alert
                     showInvalidPasswordAlert()
                 } else {
-                    // User not found in the database
+                    // el usuario no se encuentra se muestra alert
                     showInvalidUsernameAlert()
                 }
             }
+
+
 
             override fun onCancelled(databaseError: DatabaseError) {
                 Toast.makeText(this@Login, "Database Error: ${databaseError.message}", Toast.LENGTH_SHORT).show()
@@ -90,6 +96,7 @@ class Login : AppCompatActivity() {
         })
     }
 
+    //alerta cuando el usuario deja campos en blanco
     private fun showEmptyFieldsAlert() {
         val alertDialogBuilder = AlertDialog.Builder(this)
         alertDialogBuilder.setTitle("Empty Fields")
@@ -101,6 +108,7 @@ class Login : AppCompatActivity() {
         alertDialog.show()
     }
 
+    //alerta cuando la contraseña es inválida
     private fun showInvalidPasswordAlert() {
         val alertDialogBuilder = AlertDialog.Builder(this)
         alertDialogBuilder.setTitle("Invalid Password")
@@ -112,6 +120,7 @@ class Login : AppCompatActivity() {
         alertDialog.show()
     }
 
+    //alerta cuando el nombre de usuario no es válido
     private fun showInvalidUsernameAlert() {
         val alertDialogBuilder = AlertDialog.Builder(this)
         alertDialogBuilder.setTitle("Invalid Username")
@@ -123,6 +132,7 @@ class Login : AppCompatActivity() {
         alertDialog.show()
     }
 
+    //guardar el estado (logeado)
     private fun saveLoginState(isLogged: Boolean) {
         val sharedPreferences = getSharedPreferences("myPrefs",  Context.MODE_PRIVATE)
         val editor = sharedPreferences.edit()
@@ -130,7 +140,9 @@ class Login : AppCompatActivity() {
         editor.apply()
     }
 
+    //guardar datos de usuario en Shared Preferences, aún con la aplicación cerrada
     private fun saveUserData(userData: UserData) {
+        //clave valor
         val sharedPreferences =
             getSharedPreferences("myPrefs", Context.MODE_PRIVATE)
         val editor = sharedPreferences.edit()

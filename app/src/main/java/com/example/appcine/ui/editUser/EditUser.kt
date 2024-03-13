@@ -48,6 +48,7 @@ class EditUser : AppCompatActivity() {
 
         val sharedPreferences = getSharedPreferences("myPrefs", Context.MODE_PRIVATE)
 
+        //obtiene los par
         val userId = sharedPreferences.getString("uid", "")
         val username = sharedPreferences.getString("username", "")
         val firstName = sharedPreferences.getString("firstName", "")
@@ -206,6 +207,7 @@ class EditUser : AppCompatActivity() {
         )
     }
 
+    //abre la cámara si se le conceden permisos
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<out String>,
@@ -246,6 +248,7 @@ class EditUser : AppCompatActivity() {
         }
     }
 
+    //hace la foto de perfil circular
     private fun getCircularBitmap(bitmap: Bitmap): Bitmap {
         val output = Bitmap.createBitmap(bitmap.width, bitmap.height, Bitmap.Config.ARGB_8888)
         val canvas = Canvas(output)
