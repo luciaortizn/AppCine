@@ -19,7 +19,7 @@ class FavoritesFragment : Fragment() {
 
     private lateinit var  recyclerView: RecyclerView
     private lateinit var favoritesList:ArrayList<Films>
-    lateinit var imageList:Array<Int>
+    lateinit var imageList:Array<String>
     private var _binding: FragmentFavoritesBinding? = null
 
     // This property is only valid between onCreateView and
@@ -46,9 +46,7 @@ class FavoritesFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        imageList = arrayOf(
-            R.drawable.ic_add_a_photo_24,
-        )
+        imageList = arrayOf()
         val numColumnas = 2
         // GridLayoutManager con 2 columnas
         val layoutManager = GridLayoutManager(context, numColumnas)
@@ -64,10 +62,7 @@ class FavoritesFragment : Fragment() {
         _binding = null
     }
     private fun getData() {
-        for (i in imageList.indices){
-            val film= Films(imageList[i])
-            favoritesList.add(film)
-        }
+        for (i in imageList.indices){}
         recyclerView.adapter = HomeAdapter(favoritesList)
     }
 }

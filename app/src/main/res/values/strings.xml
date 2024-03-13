@@ -31,4 +31,13 @@
     <string name="foto_existente">Elegir foto existente</string>
     <string name="item_que_representa_una_pel_cula">item que representa una película</string>
     <string name="pel_culas_destacadas">Películas destacadas</string>
+    <string name="titulo">Título</string>
+    <string name="original_title">Titulo original</string>
+    <string name="directed_by">DIRECTED BY</string>
+    <string name="director_name">Director</string>
+    <string name="year">Año</string>
+    <string name="duracion">Duracion</string>
+    <string name="trailer">TRAILER</string>
+    <string name="tagline">Tagline</string>
+    <string name="overview">Overview</string>
 </resources>

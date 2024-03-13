@@ -56,6 +56,9 @@ dependencies {
     implementation("com.google.firebase:firebase-database-ktx:20.3.0")
     implementation("com.google.android.gms:play-services-auth:20.0.0")
 
+    //dependencias para la API
+    implementation("com.squareup.picasso:picasso:2.71828")
+
     //dependencias para material3
     implementation("com.google.accompanist:accompanist-adaptive:0.26.2-beta")
     // https://mvnrepository.com/artifact/com.google.android.material/material parece que es el que tiene más usos

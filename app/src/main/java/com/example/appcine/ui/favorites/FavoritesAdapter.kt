@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.appcine.R
 import com.example.appcine.ui.home.Films
 import com.example.appcine.ui.home.HomeAdapter
+import com.squareup.picasso.Picasso
 
 class FavoritesAdapter(private val dataList:ArrayList<Films>): RecyclerView.Adapter<FavoritesAdapter.ViewHolderClass>() {
 
@@ -24,7 +25,8 @@ class FavoritesAdapter(private val dataList:ArrayList<Films>): RecyclerView.Adap
 
     override fun onBindViewHolder(holder: ViewHolderClass, position: Int) {
         val currentItem = dataList[position]
-        holder.rvImage.setImageResource(currentItem.dataImage)
+        Picasso.get().load("https://image.tmdb.org/t/p/w500${currentItem.dataImage}").into(holder.rvImage)
+        //holder.rvImage.setImageResource(currentItem.dataImage)
         //aquí gestionamos el click
     }
     class ViewHolderClass(itemView: View):RecyclerView.ViewHolder(itemView){
