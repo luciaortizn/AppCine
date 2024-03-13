@@ -63,6 +63,13 @@ class FilmsInformation : AppCompatActivity() {
         isMovieLiked = sharedPreferences.getBoolean(movieLikedId, false)
         iconLike = findViewById(R.id.iconLike)
 
+        // Establecer el color del icono en consecuencia
+        if (isMovieLiked) {
+            iconLike.setColorFilter(ContextCompat.getColor(this@FilmsInformation, R.color.red))
+        } else {
+            iconLike.setColorFilter(ContextCompat.getColor(this@FilmsInformation, R.color.black))
+        }
+
         val backButton = findViewById<ImageButton>(R.id.backButton)
         val overviewTextView: TextView = findViewById(R.id.overview)
         val trailerView: TextView = findViewById(R.id.trailer)
@@ -488,6 +495,4 @@ class FilmsInformation : AppCompatActivity() {
             Log.e("FilmsInformation", "No se pudo obtener el userUid del SharedPreferences.")
         }
     }
-
-
 }
