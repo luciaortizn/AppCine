@@ -92,7 +92,8 @@ class HomeFragment : Fragment() {
                     val homeAdapter = HomeAdapter(filmList)
                     homeAdapter.setOnClickListener(object : HomeAdapter.OnClickListener {
                         override fun onClick(position: Int, model: Films) {
-                            Toast.makeText(context, model.dataImage.toString(), Toast.LENGTH_SHORT).show()
+                            Toast.makeText(context, model.dataImage.toString(), Toast.LENGTH_SHORT)
+                                .show()
                             val intent = Intent(context, FilmsInformation::class.java)
                             intent.putExtra("movieID", model.idPelicula)
                             startActivity(intent)
@@ -109,11 +110,26 @@ class HomeFragment : Fragment() {
                     filmList.clear()
                     //vuelta a vista destacada
                     getData()
+                }else{
+                    filmList.clear()
+                    //vista filtrada
+                    fetchSearchedFilms(newText)
+                    val homeAdapter = HomeAdapter(filmList)
+                    homeAdapter.setOnClickListener(object : HomeAdapter.OnClickListener {
+                        override fun onClick(position: Int, model: Films) {
+                            Toast.makeText(context, model.dataImage.toString(), Toast.LENGTH_SHORT).show()
+                            val intent = Intent(context, FilmsInformation::class.java)
+                            intent.putExtra("movieID", model.idPelicula)
+                            startActivity(intent)
+                        }
+                    })
                 }
                 return true
             }
+
         })
     }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
