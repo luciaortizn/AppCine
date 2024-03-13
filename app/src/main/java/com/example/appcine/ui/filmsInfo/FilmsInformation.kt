@@ -1,7 +1,9 @@
 package com.example.appcine.ui.filmsInfo
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.graphics.Bitmap
 import android.graphics.BitmapShader
 import android.graphics.Canvas
@@ -15,6 +17,7 @@ import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
+import android.util.Log
 import android.view.Gravity
 import android.view.MotionEvent
 import android.view.View
@@ -27,9 +30,21 @@ import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import com.example.appcine.R
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import com.squareup.picasso.Picasso
 
 class FilmsInformation : AppCompatActivity() {
+    private lateinit var sharedPreferences: SharedPreferences
+    private lateinit var databaseReference: DatabaseReference
+    private var movieLikedId: String? = null
+    private var isMovieLiked: Boolean = false
+
+    private lateinit var iconLike: ImageView
+
     @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,9 +52,16 @@ class FilmsInformation : AppCompatActivity() {
 
         supportActionBar?.hide()
 
+        // Inicializar SharedPreferences y DatabaseReference
+        sharedPreferences = getSharedPreferences("myPrefs", Context.MODE_PRIVATE)
+        databaseReference = FirebaseDatabase.getInstance().reference.child("users")
+
         val apiKey = "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzYzM2MDY4YjUxOTQ4MTJmODM2N2RhMWQxZmY3YjNmNyIsInN1YiI6IjY1YTBmOTkyNDQ3ZjljMDEyMjVhNjE1NiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ._Y48hLg92ILHsg8MsWJR6p01JUIRrRpF_m6bgI66pbo"
 
         val movieId = intent.getIntExtra("movieID", -1)
+        val movieLikedId = movieId.toString()
+        isMovieLiked = sharedPreferences.getBoolean(movieLikedId, false)
+        iconLike = findViewById(R.id.iconLike)
 
         val backButton = findViewById<ImageButton>(R.id.backButton)
         val overviewTextView: TextView = findViewById(R.id.overview)
@@ -53,9 +75,11 @@ class FilmsInformation : AppCompatActivity() {
         val layoutGeneros: LinearLayout = findViewById(R.id.layoutGeneros)
         layoutGeneros.visibility = View.GONE
 
-        val mainContainer: FrameLayout = findViewById(R.id.mainContainer)
         val addIcon: ImageView = findViewById(R.id.addIcon)
         val layoutDepliegue: LinearLayout = findViewById(R.id.layoutDepliegue)
+
+        val iconWatch = findViewById<ImageView>(R.id.iconWatch)
+        val iconWatchList = findViewById<ImageView>(R.id.iconWatchList)
 
         backButton.setOnClickListener {
             onBackPressed()
@@ -110,6 +134,9 @@ class FilmsInformation : AppCompatActivity() {
             runOnUiThread {
                 val releaseYear: TextView = findViewById(R.id.releaseYear)
                 releaseYear.text = "$year"
+
+                val dataMovie: TextView = findViewById(R.id.dataMovie)
+                dataMovie.text = "$year"
             }
         }
 
@@ -374,19 +401,6 @@ class FilmsInformation : AppCompatActivity() {
             }
         }
 
-        mainContainer.setOnTouchListener { _, event ->
-            // Oculta layoutDepliegue cuando se toca fuera de él
-            if (layoutDepliegue.visibility == View.VISIBLE && event.action == MotionEvent.ACTION_DOWN) {
-                val outRect = Rect()
-                layoutDepliegue.getGlobalVisibleRect(outRect)
-                if (!outRect.contains(event.rawX.toInt(), event.rawY.toInt())) {
-                    layoutDepliegue.visibility = View.GONE
-                    return@setOnTouchListener true
-                }
-            }
-            false
-        }
-
         addIcon.setOnClickListener {
             // Alternar la visibilidad de layoutDepliegue
             layoutDepliegue.visibility = if (layoutDepliegue.visibility == View.VISIBLE) {
@@ -395,6 +409,85 @@ class FilmsInformation : AppCompatActivity() {
                 View.VISIBLE
             }
         }
+
+        iconWatch.setOnClickListener {
+            // Agregar el ID de la película a la lista de películas para ver
+            // Aquí debes implementar la lógica para guardar el ID en la lista adecuada de UserData
+        }
+
+        iconLike.setOnClickListener {
+            isMovieLiked = !isMovieLiked
+
+            // Guardar el estado de la película marcada como favorita
+            sharedPreferences.edit().putBoolean(movieLikedId, isMovieLiked).apply()
+
+            // Establecer el color del icono en consecuencia
+            if (isMovieLiked) {
+                iconLike.setColorFilter(ContextCompat.getColor(this@FilmsInformation, R.color.red))
+                // Guardar el ID de la película en la base de datos como favorita
+                val userUid = sharedPreferences.getString("uid", "")
+                if (!userUid.isNullOrEmpty()) {
+                    val userMoviesLikedRef = databaseReference.child(userUid).child("moviesLiked")
+                    userMoviesLikedRef.push().setValue(movieLikedId)
+                        .addOnSuccessListener {
+                            Log.d("FilmsInformation", "Película agregada a la lista de películas que le gustan al usuario.")
+                        }
+                        .addOnFailureListener { e ->
+                            Log.e("FilmsInformation", "Error al agregar película a la lista de películas que le gustan al usuario: $e")
+                        }
+                } else {
+                    // No se pudo obtener el userUid del sharedPreferences
+                    Log.e("FilmsInformation", "No se pudo obtener el userUid del SharedPreferences.")
+                }
+            } else {
+                iconLike.setColorFilter(ContextCompat.getColor(this@FilmsInformation, R.color.black))
+                // Si la película se desmarca como favorita, eliminarla de la base de datos en tiempo real
+                deleteMovieFromFavorites()
+            }
+        }
+
+        iconWatchList.setOnClickListener {
+            // Agregar el ID de la película a la lista de películas pendientes de ver
+            // Aquí debes implementar la lógica para guardar el ID en la lista adecuada de UserData
+        }
     }
+
+    private fun deleteMovieFromFavorites() {
+        // Obtener el ID de la película actualmente vista
+        val movieId = intent.getIntExtra("movieID", -1)
+        val movieLikedId = movieId.toString()
+
+        // Obtener el userUid del SharedPreferences
+        val userUid = sharedPreferences.getString("uid", "")
+
+        // Verificar que el userUid no sea nulo o vacío
+        if (!userUid.isNullOrEmpty()) {
+            val userMoviesLikedRef = databaseReference.child(userUid).child("moviesLiked")
+
+            // Eliminar la película actualmente vista de la lista de favoritos en la base de datos en tiempo real
+            userMoviesLikedRef.orderByValue().equalTo(movieLikedId)
+                .addListenerForSingleValueEvent(object : ValueEventListener {
+                    override fun onDataChange(dataSnapshot: DataSnapshot) {
+                        for (snapshot in dataSnapshot.children) {
+                            snapshot.ref.removeValue()
+                                .addOnSuccessListener {
+                                    Log.d("FilmsInformation", "Película eliminada de la lista de favoritos.")
+                                }
+                                .addOnFailureListener { e ->
+                                    Log.e("FilmsInformation", "Error al eliminar película de la lista de favoritos: $e")
+                                }
+                        }
+                    }
+
+                    override fun onCancelled(databaseError: DatabaseError) {
+                        Log.e("FilmsInformation", "Error al cancelar la operación: $databaseError")
+                    }
+                })
+        } else {
+            // No se pudo obtener el userUid del SharedPreferences
+            Log.e("FilmsInformation", "No se pudo obtener el userUid del SharedPreferences.")
+        }
+    }
+
 
 }

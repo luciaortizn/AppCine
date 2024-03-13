@@ -47,4 +47,7 @@
     <string name="character">Character</string>
     <string name="job">Job</string>
     <string name="generos_pelicula">Géneros</string>
+    <string name="watch">Watch</string>
+    <string name="like">Like</string>
+    <string name="watchlist">Watchlist</string>
 </resources>
