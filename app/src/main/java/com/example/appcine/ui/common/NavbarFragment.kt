@@ -36,38 +36,6 @@ class NavbarFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        /*
-        *  //Código para cambiar de navegación
-        val view = inflater.inflate(R.layout.fragment_navbar, container, false)
-
-        // referencia a  BottomNavigationView
-        val bottomNavigationView: BottomNavigationView = view.findViewById(R.id.bottom_navigation)
-
-        bottomNavigationView.setOnItemSelectedListener { item ->
-            when(item.itemId) {
-                R.id.item_1 -> {
-                    // Respond to navigation item 1 click
-                    true
-                }
-                R.id.item_2 -> {
-                    // Respond to navigation item 2 click
-                    true
-                } R.id.item_3-> {
-                    val intent = Intent(activity, PerfilActivity::class.java)
-                    // Iniciar la otra actividad
-                    startActivity(intent)
-
-                    true
-                }
-
-                else -> false
-            }
-            *
-            *   }
-
-        return inflater.inflate(R.layout.fragment_navbar, container, false)
-        * */
-
       return null
     }
 

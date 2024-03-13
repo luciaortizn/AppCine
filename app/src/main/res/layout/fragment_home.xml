@@ -2,46 +2,20 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:backgroundTint="@color/background"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.home.HomeFragment">
     <!--searchbar-->
-    <!-- NestedScrollingChild goes here (NestedScrollView, RecyclerView, etc.).
 
-       <androidx.core.widget.NestedScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:contentDescription="Esto es un buscador de cards"
-        app:layout_behavior="@string/searchbar_scrolling_view_behavior">
-        - Screen content goes here.
-</androidx.core.widget.NestedScrollView>
-
-<com.google.android.material.appbar.AppBarLayout
-android:layout_width="match_parent"
-android:layout_height="wrap_content"
-app:layout_constraintStart_toStartOf="parent"
-app:layout_constraintTop_toTopOf="parent"
-app:layout_constraintEnd_toStartOf="@id/recycler_view">
-<com.google.android.material.search.SearchBar
-    android:id="@+id/search_bar"
-    android:layout_marginTop="0dp"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:hint="Busca tarjetas" />
-</com.google.android.material.appbar.AppBarLayout>
-     <com.google.android.material.search.SearchView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:hint="Busca tarjetas">
-        Search suggestions/results go here (ScrollView, RecyclerView, etc.).
-</com.google.android.material.search.SearchView>
-     -->
     <SearchView
         android:layout_marginTop="0dp"
         android:id="@+id/search_view"
         android:layout_width="match_parent"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         android:layout_height="wrap_content"
-        android:background="@color/blue"
+        android:background="@color/tea_green"
         android:queryHint="Busca películas..."
         app:layout_constraintTop_toTopOf="parent">
 
@@ -55,6 +29,7 @@ app:layout_constraintEnd_toStartOf="@id/recycler_view">
         android:text="@string/pel_culas_destacadas"
         android:gravity="start"
         android:textSize="20sp"
+        android:foregroundTint="@color/black"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintTop_toBottomOf="@id/search_view" />

@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:backgroundTint="@color/background"
     tools:context=".ui.perfil.PerfilFragment"
     android:padding="10dp">
 
@@ -44,6 +45,7 @@
                 android:id="@+id/editTextNombreUser"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:backgroundTint="@color/tea_green"
             android:hint="@string/username"
             android:inputType="text"
             android:padding="10dp" />
@@ -60,6 +62,7 @@
             android:id="@+id/editTextNombre"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:backgroundTint="@color/tea_green"
             android:hint="@string/name"
             android:inputType="text"
             android:padding="10dp" />
@@ -74,6 +77,7 @@
                 android:id="@+id/btnCerrarSesion"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:backgroundTint="@color/ash_gray"
                 android:text="Cerrar Sesión" />
 
             <Button
@@ -81,6 +85,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Eliminar Cuenta"
+                android:backgroundTint="@color/ash_gray"
                 android:layout_marginStart="10dp" />
         </LinearLayout>
 

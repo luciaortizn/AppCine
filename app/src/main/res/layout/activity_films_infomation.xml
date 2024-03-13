@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:clickable="true"
+    android:backgroundTint="@color/background"
     android:focusable="true"
     tools:context=".ui.filmsInfo.FilmsInformation">
 
