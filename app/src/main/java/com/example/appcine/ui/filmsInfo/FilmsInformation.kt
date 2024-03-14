@@ -472,10 +472,12 @@ class FilmsInformation : AppCompatActivity() {
                             Log.e("FilmsInformation", "Error al agregar película a la lista de películas que le gustan al usuario: $e")
                         }
                 } else {
+
                     // No se pudo obtener el userUid del sharedPreferences
                     Log.e("FilmsInformation", "No se pudo obtener el userUid del SharedPreferences.")
                 }
             } else {
+                iconLike.setImageResource(R.drawable.baseline_favorite_border_24)
                 iconLike.setColorFilter(ContextCompat.getColor(this@FilmsInformation, R.color.black))
                 // Si la película se desmarca como favorita, eliminarla de la base de datos en tiempo real
                 deleteMovieFromFavorites()
