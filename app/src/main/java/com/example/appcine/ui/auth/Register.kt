@@ -12,7 +12,14 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.example.appcine.R
 import com.example.appcine.databinding.ActivityRegisterBinding
+import com.google.android.gms.auth.api.Auth
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
@@ -25,6 +32,7 @@ class Register : AppCompatActivity() {
     private lateinit var firebaseDatabase: FirebaseDatabase
     private lateinit var databaseRerence: DatabaseReference
     private lateinit var mAuth: FirebaseAuth
+    private lateinit var mGoogleSignInClient: GoogleSignInClient
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,6 +47,14 @@ class Register : AppCompatActivity() {
         //inicializa firebase
         mAuth = FirebaseAuth.getInstance()
 
+        // Configuración de opciones de inicio de sesión con Google
+        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestIdToken(getString(R.string.default_web_client_id))
+            .requestEmail()
+            .build()
+
+        mGoogleSignInClient = GoogleSignIn.getClient(this, gso)
+
         //intenta registrar al usuario
         binding.btnRegister.setOnClickListener {
 
@@ -49,6 +65,10 @@ class Register : AppCompatActivity() {
             val firstName = binding.editTextFirstName.text.toString()
 
             registerUser(email, username, firstName, password, confirmPassword)
+        }
+
+        binding.customButton.setOnClickListener{
+            signInWithGoogle()
         }
 
         binding.changeLogIn.setOnClickListener {
@@ -251,6 +271,48 @@ class Register : AppCompatActivity() {
         }
 
         repeatPasswordEditText.setSelection(repeatPasswordEditText.text.length)
+    }
+
+    private fun signInWithGoogle() {
+        val signInIntent = mGoogleSignInClient.signInIntent
+        startActivityForResult(signInIntent, RC_SIGN_IN)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (requestCode == RC_SIGN_IN) {
+            val task = GoogleSignIn.getSignedInAccountFromIntent(data)
+            try {
+                // Autenticación exitosa, obtén la cuenta de Google
+                val account = task.getResult(ApiException::class.java)!!
+                // Llama a un método para autenticar con Firebase
+                firebaseAuthWithGoogle(account)
+            } catch (e: ApiException) {
+                // La autenticación falló, muestra un mensaje de error
+                Toast.makeText(this, "Authentication failed: ${e.statusCode}", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
+    private fun firebaseAuthWithGoogle(account: GoogleSignInAccount) {
+        val credential = GoogleAuthProvider.getCredential(account.idToken, null)
+        mAuth.signInWithCredential(credential)
+            .addOnCompleteListener(this) { task ->
+                if (task.isSuccessful) {
+                    // Autenticación exitosa, el usuario está ahora autenticado con Firebase
+                    val user = mAuth.currentUser
+                    // Aquí puedes guardar los datos del usuario en Firebase Database si es necesario
+                } else {
+                    // La autenticación falló, muestra un mensaje de error
+                    Toast.makeText(this, "Authentication failed.", Toast.LENGTH_SHORT).show()
+                }
+            }
+    }
+
+    companion object {
+        private const val TAG = "GoogleSignInActivity"
+        private const val RC_SIGN_IN = 9001
     }
 
 }

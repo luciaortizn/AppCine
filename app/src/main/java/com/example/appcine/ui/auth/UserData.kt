@@ -8,6 +8,6 @@ data class UserData(
     val password: String? = null,
     val profileImage: String? = null,
     val moviesToWatch: List<String>? = null,
-    val moviesLiked: List<Int>? = null,
+    val moviesLiked: List<String>? = null,
     val moviesPending: List<String>? = null
 )

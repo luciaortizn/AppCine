@@ -78,7 +78,7 @@ class HomeFragment : Fragment() {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 // Este método se llama cuando se presiona "Enter" en el teclado
                 if (query != null) {
-                    Toast.makeText(context, query, Toast.LENGTH_SHORT).show()
+                    //Toast.makeText(context, query, Toast.LENGTH_SHORT).show()
                     // filtro la búsqueda
                     filmList.clear()
                     //vista filtrada
@@ -86,8 +86,7 @@ class HomeFragment : Fragment() {
                     val homeAdapter = HomeAdapter(filmList)
                     homeAdapter.setOnClickListener(object : HomeAdapter.OnClickListener {
                         override fun onClick(position: Int, model: Films) {
-                            Toast.makeText(context, model.dataImage.toString(), Toast.LENGTH_SHORT)
-                                .show()
+                            //Toast.makeText(context, model.dataImage.toString(), Toast.LENGTH_SHORT).show()
                             val intent = Intent(context, FilmsInformation::class.java)
                             intent.putExtra("movieID", model.idPelicula)
                             startActivity(intent)
@@ -111,7 +110,7 @@ class HomeFragment : Fragment() {
                     val homeAdapter = HomeAdapter(filmList)
                     homeAdapter.setOnClickListener(object : HomeAdapter.OnClickListener {
                         override fun onClick(position: Int, model: Films) {
-                            Toast.makeText(context, model.dataImage.toString(), Toast.LENGTH_SHORT).show()
+                            //Toast.makeText(context, model.dataImage.toString(), Toast.LENGTH_SHORT).show()
                             val intent = Intent(context, FilmsInformation::class.java)
                             intent.putExtra("movieID", model.idPelicula)
                             startActivity(intent)
@@ -134,7 +133,7 @@ class HomeFragment : Fragment() {
         val homeAdapter = HomeAdapter(filmList)
         homeAdapter.setOnClickListener(object : HomeAdapter.OnClickListener {
             override fun onClick(position: Int, model: Films) {
-                Toast.makeText(context, model.dataImage.toString(), Toast.LENGTH_SHORT).show()
+                //Toast.makeText(context, model.dataImage.toString(), Toast.LENGTH_SHORT).show()
                 val intent = Intent(context, FilmsInformation::class.java)
                 intent.putExtra("movieID", model.idPelicula)
                 startActivity(intent)

@@ -41,6 +41,8 @@ class FilmsInformation : AppCompatActivity() {
     private lateinit var sharedPreferences: SharedPreferences
     private lateinit var databaseReference: DatabaseReference
     private var isMovieLiked: Boolean = false
+    private var isMovieWatch: Boolean = false
+    private var isMovieWhatlist: Boolean = false
 
     private lateinit var iconLike: ImageView
 
@@ -416,10 +418,37 @@ class FilmsInformation : AppCompatActivity() {
             }
         }
 
-        iconWatch.setOnClickListener {
+        /*iconWatch.setOnClickListener {
             // Agregar el ID de la película a la lista de películas para ver
-            // Aquí debes implementar la lógica para guardar el ID en la lista adecuada de UserData
-        }
+            isMovieWatch = !isMovieWatch
+
+            // Guardar el estado de la película marcada como favorita
+            sharedPreferences.edit().putBoolean(movieLikedId, isMovieWatch).apply()
+
+            // Establecer el color del icono en consecuencia
+            if (isMovieWatch) {
+                iconWatch.setColorFilter(ContextCompat.getColor(this@FilmsInformation, R.color.red))
+                // Guardar el ID de la película en la base de datos como favorita
+                val userUid = sharedPreferences.getString("uid", "")
+                if (!userUid.isNullOrEmpty()) {
+                    val userMoviesWatchRef = databaseReference.child(userUid).child("moviesToWatch")
+                    userMoviesWatchRef.push().setValue(movieLikedId)
+                        .addOnSuccessListener {
+                            Log.d("FilmsInformation", "Película agregada a la lista de películas que le gustan al usuario.")
+                        }
+                        .addOnFailureListener { e ->
+                            Log.e("FilmsInformation", "Error al agregar película a la lista de películas que le gustan al usuario: $e")
+                        }
+                } else {
+                    // No se pudo obtener el userUid del sharedPreferences
+                    Log.e("FilmsInformation", "No se pudo obtener el userUid del SharedPreferences.")
+                }
+            } else {
+                iconLike.setColorFilter(ContextCompat.getColor(this@FilmsInformation, R.color.black))
+                // Si la película se desmarca como favorita, eliminarla de la base de datos en tiempo real
+                deleteMovieFromFavorites()
+            }
+        }*/
 
         iconLike.setOnClickListener {
             isMovieLiked = !isMovieLiked
@@ -452,10 +481,10 @@ class FilmsInformation : AppCompatActivity() {
             }
         }
 
-        iconWatchList.setOnClickListener {
+        /*iconWatchList.setOnClickListener {
             // Agregar el ID de la película a la lista de películas pendientes de ver
             // Aquí debes implementar la lógica para guardar el ID en la lista adecuada de UserData
-        }
+        }*/
     }
 
     private fun deleteMovieFromFavorites() {

@@ -46,6 +46,7 @@
                 android:layout_marginBottom="20dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textColorHint="@color/white"
                 android:textColor="@color/white"
                 android:hint="@string/email"
                 android:backgroundTint="@color/white"/>
@@ -56,6 +57,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColorHint="@color/white"
+                android:textColor="@color/white"
                 android:hint="@string/username"
                 android:backgroundTint="@color/white"/>
 
@@ -66,6 +68,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColorHint="@color/white"
+                android:textColor="@color/white"
                 android:hint="@string/name"
                 android:backgroundTint="@color/white"/>
 
@@ -84,6 +87,7 @@
                     android:layout_height="wrap_content"
                     android:inputType="textPassword"
                     android:textColorHint="@color/white"
+                    android:textColor="@color/white"
                     android:hint="@string/password"
                     android:backgroundTint="@color/white"
                     android:tag="password"/>
@@ -114,6 +118,7 @@
                     android:layout_height="wrap_content"
                     android:inputType="textPassword"
                     android:textColorHint="@color/white"
+                    android:textColor="@color/white"
                     android:hint="@string/repeatPassword"
                     android:backgroundTint="@color/white"
                     android:tag="password"/>
@@ -166,6 +171,32 @@
 
             </LinearLayout>
 
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/customButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/rounded_background"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center"
+            android:onClick="onCustomButtonClick"
+            android:orientation="horizontal"
+            android:padding="10dp">
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginRight="10dp"
+                android:src="@drawable/ic_google" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/register_google"
+                android:textColor="@color/black" />
         </LinearLayout>
 
     </LinearLayout>

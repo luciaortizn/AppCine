@@ -70,7 +70,7 @@
             android:orientation="horizontal"
             android:layout_marginTop="20dp">
 
-            <Button
+            <!--<Button
                 android:id="@+id/buttonWatch"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -78,7 +78,7 @@
                 android:textSize="20sp"
                 android:layout_weight="1"
                 android:layout_marginEnd="8dp"
-                android:background="@android:color/transparent" />
+                android:background="@android:color/transparent" />-->
 
             <Button
                 android:id="@+id/buttonLike"
@@ -103,6 +103,22 @@
 
         <LinearLayout
             android:id="@+id/movieFavFilmas"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginBottom="70dp">
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/movieWatchFilmas"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginBottom="70dp">
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/movieWatchlistFilmas"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"

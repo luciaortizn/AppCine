@@ -183,6 +183,14 @@ class Login : AppCompatActivity() {
         editor.putString("username", userData.username)
         editor.putString("firstName", userData.firstName)
         editor.putString("password", userData.password)
+
+        // Guarda la lista de películas que le gustan al usuario
+        if (userData.moviesLiked != null) {
+            // Convierte la lista a un String para almacenarla en Shared Preferences
+            val moviesLikedString = userData.moviesLiked.joinToString(",")
+            editor.putString("moviesLiked", moviesLikedString)
+        }
+
         editor.apply()
     }
 }

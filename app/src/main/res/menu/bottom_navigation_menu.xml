@@ -6,12 +6,12 @@
         android:enabled="true"
         android:icon="@drawable/outline_home_24"
         android:title="@string/home"/>
-    <item
+    <!--<item
 
         android:id="@+id/navigation_dashboard"
         android:enabled="true"
         android:icon="@drawable/baseline_favorite_border_24"
-        android:title="@string/favoritos"/>
+        android:title="@string/favoritos"/>-->
     <item
 
         android:id="@+id/navigation_notifications"
