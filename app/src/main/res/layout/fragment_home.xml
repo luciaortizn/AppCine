@@ -15,7 +15,7 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_height="wrap_content"
-        android:background="@color/tea_green"
+        android:background="@color/ash_gray"
         android:queryHint="Busca películas..."
         app:layout_constraintTop_toTopOf="parent">
 
@@ -28,8 +28,10 @@
         android:layout_marginTop="60dp"
         android:text="@string/pel_culas_destacadas"
         android:gravity="start"
+
         android:textSize="20sp"
-        android:foregroundTint="@color/black"
+        android:textColor="@color/black"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintTop_toBottomOf="@id/search_view" />

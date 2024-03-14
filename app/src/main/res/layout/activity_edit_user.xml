@@ -27,6 +27,7 @@
             android:id="@+id/textEditPhoto"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/black"
             android:text="@string/editPhoto"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="13dp"
@@ -37,14 +38,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/usuario"
-            android:textSize="14sp"
-            android:layout_marginTop="20dp"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:layout_marginTop="50dp"
             android:layout_marginLeft="10dp"/>
 
         <EditText
                 android:id="@+id/editTextNombreUser"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="@color/background"
             android:backgroundTint="@color/tea_green"
             android:hint="@string/username"
             android:inputType="text"
@@ -54,7 +57,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/nombre"
-            android:textSize="14sp"
+            android:textColor="@color/black"
+            android:textSize="16sp"
             android:layout_marginTop="20dp"
             android:layout_marginLeft="10dp"/>
 
@@ -64,12 +68,15 @@
             android:layout_height="wrap_content"
             android:backgroundTint="@color/tea_green"
             android:hint="@string/name"
+            android:textColor="@color/background"
             android:inputType="text"
+            android:layout_marginBottom="40dp"
             android:padding="10dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:orientation="horizontal"
             android:layout_marginTop="20dp">
 

@@ -458,6 +458,7 @@ class FilmsInformation : AppCompatActivity() {
 
             // Establecer el color del icono en consecuencia
             if (isMovieLiked) {
+                iconLike.setImageResource(R.drawable.baseline_favorite_24)
                 iconLike.setColorFilter(ContextCompat.getColor(this@FilmsInformation, R.color.red))
                 // Guardar el ID de la película en la base de datos como favorita
                 val userUid = sharedPreferences.getString("uid", "")

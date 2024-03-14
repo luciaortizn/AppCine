@@ -47,14 +47,14 @@ class Register : AppCompatActivity() {
         //inicializa firebase
         mAuth = FirebaseAuth.getInstance()
 
+        /**
         // Configuración de opciones de inicio de sesión con Google
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-            .requestIdToken(getString(R.string.default_web_client_id))
+            .requestIdToken(getString(project-577907861011))
             .requestEmail()
             .build()
-
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso)
-
+        */
         //intenta registrar al usuario
         binding.btnRegister.setOnClickListener {
 

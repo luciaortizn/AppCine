@@ -2,6 +2,7 @@ package com.example.appcine.ui.perfil
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -48,15 +49,24 @@ class PerfilFragment : Fragment() {
         _binding = FragmentUserBinding.inflate(inflater, container, false)
         val view = binding.root
 
-        getUserData()
-
         binding.btnEditProfile.setOnClickListener{
             val intent = Intent(activity, EditUser::class.java)
             startActivity(intent)
             activity?.overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
         }
+        return view
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        getUserData()
+        val movies = mutableListOf<Int>()
+        val blackColor = ContextCompat.getColor(requireContext(), R.color.black)
+        val pistachioColor = ContextCompat.getColor(requireContext(), R.color.pistachio)
 
         binding.buttonLike.setOnClickListener {
+            binding.buttonLike.setTextColor(pistachioColor)
+            binding.buttonWatchlist.setTextColor(blackColor)
             Log.d("BotonLike", "Le has dado al boton Like")
             val sharedPreferences = requireActivity().getSharedPreferences("myPrefs", Context.MODE_PRIVATE)
             val userId = sharedPreferences.getString("uid", "")
@@ -67,7 +77,7 @@ class PerfilFragment : Fragment() {
                 override fun onDataChange(snapshot: DataSnapshot) {
                     binding.movieFavFilmas.removeAllViews()
 
-                    val movies = mutableListOf<Int>()
+
                     snapshot.children.forEach { movieSnapshot ->
                         val movieIdString = movieSnapshot.value as String
                         val movieId = movieIdString.toInt()
@@ -97,7 +107,7 @@ class PerfilFragment : Fragment() {
                                             LinearLayout.LayoutParams.WRAP_CONTENT,
                                             LinearLayout.LayoutParams.WRAP_CONTENT
                                         )
-                                        val margin = resources.getDimensionPixelSize(R.dimen.margin_between_posters)
+                                        val margin = 2
                                         layoutParams.setMargins(margin, 0, margin, 10)
                                         imageView.layoutParams = layoutParams
 
@@ -121,7 +131,13 @@ class PerfilFragment : Fragment() {
             })
         }
 
-        return view
+        binding.buttonWatchlist.setOnClickListener{
+            binding.buttonLike.setTextColor(blackColor)
+            binding.buttonWatchlist.setTextColor(pistachioColor)
+            movies.clear()
+
+
+        }
     }
 
     private fun obtenerPosterPeliculaFavorita(movieId: Int, apiKey: String, callback: (String?) -> Unit) {
