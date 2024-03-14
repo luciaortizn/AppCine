@@ -40,7 +40,6 @@ import com.squareup.picasso.Picasso
 class FilmsInformation : AppCompatActivity() {
     private lateinit var sharedPreferences: SharedPreferences
     private lateinit var databaseReference: DatabaseReference
-    private var movieLikedId: String? = null
     private var isMovieLiked: Boolean = false
 
     private lateinit var iconLike: ImageView
